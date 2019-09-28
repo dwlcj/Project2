@@ -1,0 +1,41 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Some Time Later.otf" type="DynamicFontData" id=1]
+[ext_resource path="res://Button.tscn" type="PackedScene" id=2]
+
+[sub_resource type="DynamicFont" id=1]
+size = 100
+extra_spacing_top = -28
+extra_spacing_bottom = -7
+font_data = ExtResource( 1 )
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+rect_scale = Vector2( 25.5979, 14.8963 )
+
+[node name="Label" type="Label" parent="."]
+margin_top = 1.05266
+margin_right = 875.105
+margin_bottom = 474.053
+rect_scale = Vector2( 1.17298, 1.25974 )
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 1, 0.305882, 0.305882, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 5
+text = "Press any button
+ to start"
+align = 1
+valign = 1
+
+[node name="Button" parent="." instance=ExtResource( 2 )]
+margin_left = 399.445
+margin_top = 465.768
+margin_right = 480.445
+margin_bottom = 498.768
+text = "PLAY"
