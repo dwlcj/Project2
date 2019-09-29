@@ -10,7 +10,7 @@
 [node name="Spatial" type="Spatial"]
 
 [node name="Camera" type="Camera" parent="."]
-transform = Transform( -1, 5.22898e-08, -7.00608e-08, 9.77264e-09, 0.863241, 0.504792, 8.68748e-08, 0.504792, -0.863241, 0, 3.02313, -5.45283 )
+transform = Transform( -1, 5.22898e-008, -7.00608e-008, 9.77264e-009, 0.863241, 0.504792, 8.68748e-008, 0.504792, -0.863241, 0, 3.02313, -5.45283 )
 fov = 90.0
 script = ExtResource( 1 )
 

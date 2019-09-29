@@ -27,6 +27,8 @@ func _input(event):
 		y = 0
 		
 func _process(delta):
+	if(translation.y < -12):
+		get_tree().change_scene("res://GameOverScreen.tscn")
 	if x != 0 or y != 0 or z != 0:
 		var vel = get_linear_velocity()
 		if x != 0:
