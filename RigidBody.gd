@@ -10,7 +10,7 @@ func _input(event):
 	elif event.is_action_pressed("ui_left"):
 		apply_central_impulse(Vector3(5, 0, 0))
 	elif event.is_action_pressed("ui_space"):
-		apply_central_impulse(Vector3(0, 10, 0))
+		apply_central_impulse(Vector3(0, 8, 0))
 		
 func _process(delta):
 	if(translation.y < -12):
