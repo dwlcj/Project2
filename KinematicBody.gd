@@ -4,9 +4,9 @@ var gravity = -9.8
 var velocity = Vector3()
 var camera
 
-const SPEED = 6
-const ACCELERATION = 5
-const DE_ACCELERATION = 8
+const SPEED = 10
+const ACCELERATION = 8
+const DE_ACCELERATION = 14
 
 func _ready():
 	camera = get_node("../Camera").get_global_transform()
@@ -31,7 +31,7 @@ func _physics_process(delta):
 	dir = dir.normalized()
 	
 	if Input.is_action_pressed("ui_space"):
-		velocity.y = 5
+		velocity.y = 6
 	else:
 		velocity.y += delta * gravity
 	
