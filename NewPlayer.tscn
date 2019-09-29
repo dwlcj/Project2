@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Camera.gd" type="Script" id=1]
-[ext_resource path="res://RigidBody.gd" type="Script" id=2]
+[ext_resource path="res://KinematicBody.gd" type="Script" id=2]
 
 [sub_resource type="CubeMesh" id=1]
 
@@ -14,12 +14,12 @@ transform = Transform( -1, 5.22898e-08, -7.00608e-08, 9.77264e-09, 0.863241, 0.5
 fov = 90.0
 script = ExtResource( 1 )
 
-[node name="RigidBody" type="RigidBody" parent="."]
+[node name="KinematicBody" type="KinematicBody" parent="."]
 script = ExtResource( 2 )
 
-[node name="MeshInstance" type="MeshInstance" parent="RigidBody"]
+[node name="MeshInstance" type="MeshInstance" parent="KinematicBody"]
 mesh = SubResource( 1 )
 material/0 = null
 
-[node name="CollisionShape" type="CollisionShape" parent="RigidBody"]
+[node name="CollisionShape" type="CollisionShape" parent="KinematicBody"]
 shape = SubResource( 2 )

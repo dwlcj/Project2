@@ -6,4 +6,4 @@ func _ready():
 	ofs = translation
 
 func _process(delta):
-	translation = $"../RigidBody".translation + ofs
+	translation = $"../KinematicBody".translation + ofs
