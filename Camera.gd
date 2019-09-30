@@ -10,4 +10,4 @@ func _input(event):
 		get_tree().quit()
 
 func _process(delta):
-	translation = $"../RigidBody".translation + ofs
+	translation = $"../KinematicBody".translation + ofs

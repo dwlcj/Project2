@@ -1,4 +1,4 @@
-extends RigidBody
+extends KinematicBody
 
 var gravity = -9.8
 var velocity = Vector3()
@@ -49,6 +49,4 @@ func _physics_process(delta):
 	velocity.x = hv.x
 	velocity.z = hv.z
 	
-	set_linear_velocity(velocity)
-	
-	#velocity = move_and_slide(velocity, Vector3(0, 1, 0))
+	velocity = move_and_slide(velocity, Vector3(0, 1, 0))
