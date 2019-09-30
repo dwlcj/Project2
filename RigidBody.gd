@@ -1,4 +1,4 @@
-extends KinematicBody
+extends RigidBody
 
 var gravity = -9.8
 var velocity = Vector3()
@@ -12,7 +12,7 @@ func _ready():
 	camera = get_node("../Camera").get_global_transform()
 
 func _process(delta):
-	if(translation.y < -12):
+	if translation.y < -12:
 		get_tree().change_scene("res://GameOverScreen.tscn")
 		
 func _physics_process(delta):
@@ -49,4 +49,6 @@ func _physics_process(delta):
 	velocity.x = hv.x
 	velocity.z = hv.z
 	
-	velocity = move_and_slide(velocity, Vector3(0, 1, 0))
+	set_linear_velocity(velocity)
+	
+	#velocity = move_and_slide(velocity, Vector3(0, 1, 0))
