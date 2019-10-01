@@ -3,7 +3,7 @@ extends KinematicBody
 var gravity = -9.8 * 3
 var velocity = Vector3()
 var camera
-var jumps = 1
+var jumps = 2
 
 const SPEED = 10
 const ACCELERATION = 8
@@ -17,7 +17,7 @@ func _ready():
 	get_parent().get_parent().get_child(3).get_child(2).connect("hit_floor", self, "hit_floor_received")
 
 func hit_floor_received():
-	jumps = 1
+	jumps = 2
 
 func _process(delta):
 	if translation.y < -12:
@@ -41,7 +41,7 @@ func _physics_process(delta):
 	var hv = velocity
 	hv.y = 0
 	
-	if Input.is_action_pressed("ui_space") and jumps > 0:
+	if Input.is_action_just_pressed("ui_space") and jumps > 0:
 		jumps = jumps - 1
 		velocity.y = 10
 	elif velocity.y < -SPEED / 2 and Input.is_action_pressed("ui_glide"):
