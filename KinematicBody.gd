@@ -1,6 +1,6 @@
 extends KinematicBody
 
-var gravity = -9.8
+var gravity = -9.8 * 3
 var velocity = Vector3()
 var camera
 
@@ -31,7 +31,7 @@ func _physics_process(delta):
 	dir = dir.normalized()
 	
 	if Input.is_action_pressed("ui_space"):
-		velocity.y = 6
+		velocity.y = 10
 	else:
 		velocity.y += delta * gravity
 	
