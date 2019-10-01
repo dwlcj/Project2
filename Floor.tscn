@@ -1,16 +1,8 @@
-<<<<<<< HEAD
-[gd_scene load_steps=8 format=2]
-
-[ext_resource path="res://Floor.gd" type="Script" id=1]
-[ext_resource path="res://CoinObject.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Textures/FloorTexture.png" type="Texture" id=3]
-=======
 [gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Floor.gd" type="Script" id=1]
 [ext_resource path="res://Area.gd" type="Script" id=2]
 [ext_resource path="res://CoinObject.tscn" type="PackedScene" id=3]
->>>>>>> c5d018b4640feeb67d1a0e38f755b58048ceaf22
 
 [sub_resource type="SpatialMaterial" id=1]
 albedo_texture = ExtResource( 3 )
