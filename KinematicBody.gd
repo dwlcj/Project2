@@ -30,13 +30,15 @@ func _physics_process(delta):
 	dir.y = 0
 	dir = dir.normalized()
 	
-	if Input.is_action_pressed("ui_space"):
-		velocity.y = 10
-	else:
-		velocity.y += delta * gravity
-	
 	var hv = velocity
 	hv.y = 0
+	
+	if Input.is_action_pressed("ui_space"):
+		velocity.y = 10
+	elif velocity.y < -SPEED / 2 and Input.is_action_pressed("ui_glide"):
+		velocity.y = -SPEED / 2
+	else:
+		velocity.y += delta * gravity
 	
 	var new_pos = dir * SPEED
 	var accel = DE_ACCELERATION
