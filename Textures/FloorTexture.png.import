@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/GoalTexture.png-d58379582e5c50c1d98fee76b519d611.s3tc.stex"
-path.etc2="res://.import/GoalTexture.png-d58379582e5c50c1d98fee76b519d611.etc2.stex"
+path.s3tc="res://.import/FloorTexture.png-124573c18bde75978aa364b8b6329dea.s3tc.stex"
+path.etc2="res://.import/FloorTexture.png-124573c18bde75978aa364b8b6329dea.etc2.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc2" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://GoalTexture.png"
-dest_files=[ "res://.import/GoalTexture.png-d58379582e5c50c1d98fee76b519d611.s3tc.stex", "res://.import/GoalTexture.png-d58379582e5c50c1d98fee76b519d611.etc2.stex" ]
+source_file="res://Textures/FloorTexture.png"
+dest_files=[ "res://.import/FloorTexture.png-124573c18bde75978aa364b8b6329dea.s3tc.stex", "res://.import/FloorTexture.png-124573c18bde75978aa364b8b6329dea.etc2.stex" ]
 
 [params]
 
