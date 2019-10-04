@@ -42,6 +42,7 @@ func _physics_process(delta):
 	hv.y = 0
 	
 	if Input.is_action_just_pressed("ui_space") and jumps > 0:
+		get_parent().get_node("Jump").play(0)
 		jumps = jumps - 1
 		velocity.y = 10
 	elif velocity.y < -SPEED / 2 and Input.is_action_pressed("ui_glide"):
