@@ -6,6 +6,7 @@ var gravity = -9.8 * 3
 var velocity = Vector3()
 var camera
 var jumps = 2
+var prev_collided = false
 
 const SPEED = 10
 const ACCELERATION = 8
@@ -72,4 +73,14 @@ func _physics_process(delta):
 	velocity.x = hv.x
 	velocity.z = hv.z
 	
-	velocity = move_and_slide(velocity, Vector3(0, 1, 0))
+	if Input.is_action_pressed("ui_shift"):
+		var kc = move_and_collide(velocity, true, true, true)
+		var collided = is_instance_valid(kc)
+		if not collided and prev_collided:
+			velocity.x = 0
+			velocity.z = 0
+		else:
+			velocity = move_and_slide(velocity, Vector3(0, 1, 0))
+			prev_collided = collided
+	else:
+		velocity = move_and_slide(velocity, Vector3(0, 1, 0))
