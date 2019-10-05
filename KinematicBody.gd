@@ -1,5 +1,7 @@
 extends KinematicBody
 
+export var strafe = true
+
 var gravity = -9.8 * 3
 var velocity = Vector3()
 var camera
@@ -30,12 +32,20 @@ func _physics_process(delta):
 		dir -= camera.basis[2]
 	if Input.is_action_pressed("ui_down"):
 		dir += camera.basis[2]
-	if Input.is_action_pressed("ui_left"):
-		dir -= camera.basis[0]
-	if Input.is_action_pressed("ui_right"):
-		dir += camera.basis[0]
+	if strafe:
+		if Input.is_action_pressed("ui_left"):
+			dir -= camera.basis[0]
+		if Input.is_action_pressed("ui_right"):
+			dir += camera.basis[0]
+	else:
+		if Input.is_action_pressed("ui_left"):
+			rotation.y += delta
+		elif Input.is_action_pressed("ui_right"):
+			rotation.y -= delta
+	
 		
 	dir.y = 0
+	dir = dir.rotated(Vector3(0, 1, 0), rotation.y)
 	dir = dir.normalized()
 	
 	var hv = velocity
