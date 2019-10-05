@@ -17,6 +17,7 @@ func _ready():
 	get_parent().get_parent().get_child(1).get_child(2).connect("hit_floor", self, "hit_floor_received")
 	get_parent().get_parent().get_child(2).get_child(2).connect("hit_floor", self, "hit_floor_received")
 	get_parent().get_parent().get_child(3).get_child(2).connect("hit_floor", self, "hit_floor_received")
+	get_parent().get_parent().get_child(4).get_child(1).connect("hit_floor", self, "hit_floor_received")
 
 func hit_floor_received():
 	jumps = 2
