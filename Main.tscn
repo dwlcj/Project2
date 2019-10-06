@@ -21,7 +21,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.20425, -7.49201, 50.9257 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.117231, -8.85658, 62.5225 )
 
 [node name="Spatial2" parent="." instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 28.0265 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.86131, 28.0265 )
 
 [node name="Spatial" parent="." instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.380194, 6.82053, -3.81561 )

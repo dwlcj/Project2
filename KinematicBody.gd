@@ -46,7 +46,6 @@ func hit_ledge_received():
 	
 func leave_ledge_received():
 	in_ledge = false
-	jumps = 2
 	gravity = -9.8 * 3
 
 func collect_coin():
@@ -54,26 +53,28 @@ func collect_coin():
 	emit_signal("coin_collected", coin_count)
 
 func _process(delta):
-	if translation.y < -12:
+	if translation.y < -20:
 		get_tree().change_scene("res://GameOverScreen.tscn")
 		
 func _physics_process(delta):
 	var dir = Vector3()
 	
-	if Input.is_action_pressed("ui_up"):
-		dir -= camera.basis[2]
-	if Input.is_action_pressed("ui_down"):
-		dir += camera.basis[2]
-	if strafe:
-		if Input.is_action_pressed("ui_left"):
-			dir -= camera.basis[0]
-		if Input.is_action_pressed("ui_right"):
-			dir += camera.basis[0]
-	else:
-		if Input.is_action_pressed("ui_left"):
-			rotation.y += delta
-		elif Input.is_action_pressed("ui_right"):
-			rotation.y -= delta
+	# adding "and is_on_floor()" will disable air movement
+	if not is_on_wall():
+		if Input.is_action_pressed("ui_up"):
+			dir -= camera.basis[2]
+		if Input.is_action_pressed("ui_down"):
+			dir += camera.basis[2]
+		if strafe:
+			if Input.is_action_pressed("ui_left"):
+				dir -= camera.basis[0]
+			if Input.is_action_pressed("ui_right"):
+				dir += camera.basis[0]
+		else:
+			if Input.is_action_pressed("ui_left"):
+				rotation.y += delta
+			elif Input.is_action_pressed("ui_right"):
+				rotation.y -= delta
 	
 		
 	dir.y = 0
@@ -118,4 +119,8 @@ func _physics_process(delta):
 				velocity = move_and_slide(velocity, Vector3(0, 1, 0))
 				prev_collided = collided
 	else:
-		velocity = move_and_slide(velocity, Vector3(0, 1, 0))
+		var kc = move_and_collide(velocity, true, true, true)
+		if is_instance_valid(kc):
+			velocity = move_and_slide(velocity, Vector3(0, 1, 0), false, 4, deg2rad(20))
+		else:
+			velocity = move_and_slide(velocity, Vector3(0, 1, 0))
