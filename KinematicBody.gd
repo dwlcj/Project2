@@ -2,11 +2,14 @@ extends KinematicBody
 
 export var strafe = true
 
+signal coin_collected
+
 var gravity = -9.8 * 3
 var velocity = Vector3()
 var camera
 var jumps = 2
 var prev_collided = false
+var coin_count = 0
 
 const SPEED = 10
 const ACCELERATION = 8
@@ -19,9 +22,17 @@ func _ready():
 	get_parent().get_parent().get_child(2).get_child(2).connect("hit_floor", self, "hit_floor_received")
 	get_parent().get_parent().get_child(3).get_child(2).connect("hit_floor", self, "hit_floor_received")
 	get_parent().get_parent().get_child(4).get_child(1).connect("hit_floor", self, "hit_floor_received")
+	get_parent().get_parent().get_child(0).get_child(3).get_child(1).connect("coin_touched", self, "collect_coin")
+	get_parent().get_parent().get_child(1).get_child(3).get_child(1).connect("coin_touched", self, "collect_coin")
+	get_parent().get_parent().get_child(2).get_child(3).get_child(1).connect("coin_touched", self, "collect_coin")
+	get_parent().get_parent().get_child(3).get_child(3).get_child(1).connect("coin_touched", self, "collect_coin")
 
 func hit_floor_received():
 	jumps = 2
+
+func collect_coin():
+	coin_count += 1
+	emit_signal("coin_collected", coin_count)
 
 func _process(delta):
 	if translation.y < -12:

@@ -1,20 +1,16 @@
-extends Area
+extends Control
 
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
 
-signal coin_touched
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	get_parent().get_parent().get_child(5).get_child(1).connect("coin_collected", self, "increment_coin_label")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
 
-
-func _on_Area_body_entered(body):
-	emit_signal("coin_touched")
-	get_parent().queue_free()
+func increment_coin_label(coins):
+	$Label.text = "Coins: " + str(coins)
