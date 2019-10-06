@@ -11,6 +11,7 @@ var jumps = 2
 var prev_collided = false
 var coin_count = 0
 var in_ledge = false
+var sfx = 1;
 
 const SPEED = 10
 const ACCELERATION = 8
@@ -53,6 +54,14 @@ func collect_coin():
 	emit_signal("coin_collected", coin_count)
 
 func _process(delta):
+	if Input.is_key_pressed(KEY_COMMA):
+		get_parent().get_node("AudioStreamPlayer3D").stop()
+	if Input.is_key_pressed(KEY_PERIOD):
+		get_parent().get_node("AudioStreamPlayer3D").play(0)
+	if Input.is_key_pressed(KEY_N):
+		sfx = 0;
+	if Input.is_key_pressed(KEY_M):
+		sfx = 1;
 	if translation.y < -20:
 		get_tree().change_scene("res://GameOverScreen.tscn")
 		
@@ -85,7 +94,8 @@ func _physics_process(delta):
 	hv.y = 0
 	
 	if Input.is_action_just_pressed("ui_space") and jumps > 0:
-		get_parent().get_node("Jump").play(0)
+		if(sfx > 0):
+			get_parent().get_node("Jump").play(0)
 		jumps = jumps - 1
 		velocity.y = 10
 	elif velocity.y < -SPEED / 2 and Input.is_action_pressed("ui_glide"):
