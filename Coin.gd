@@ -16,5 +16,6 @@ func _ready():
 
 
 func _on_Area_body_entered(body):
+	get_parent().get_parent().get_node("CoinSound").play(0)
 	emit_signal("coin_touched")
 	get_parent().queue_free()
