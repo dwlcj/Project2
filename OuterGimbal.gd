@@ -1,7 +1,7 @@
-extends Camera
+extends Spatial
 
 var ofs = Vector3()
-var invert_y = false
+var invert_y = true
 var invert_x = false
 var mouse_control = true
 var mouse_sensitivity = 0.005
@@ -19,7 +19,8 @@ func _input(event):
 			rotate_object_local(Vector3.UP, dir * event.relative.x * mouse_sensitivity)
 		if event.relative.y != 0:
 			var dir = 1 if invert_y else -1
-			$InnerGimbal.rotate_object_local(Vector3.RIGHT, dir * event.relative.y * mouse_sensitivity)
+			var y_rotation = clamp(event.relative.y, -30, 30)
+			$InnerGimbal.rotate_object_local(Vector3.RIGHT, dir * y_rotation * mouse_sensitivity)
 
 
 func _process(delta):

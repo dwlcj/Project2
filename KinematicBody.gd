@@ -17,7 +17,7 @@ const ACCELERATION = 8
 const DE_ACCELERATION = 14
 
 func _ready():
-	camera = get_node("../Camera").get_global_transform()
+	camera = get_node("../OuterGimbal/InnerGimbal/Camera").get_global_transform()
 	get_parent().get_parent().get_child(0).get_child(2).connect("hit_floor", self, "hit_floor_received")
 	get_parent().get_parent().get_child(1).get_child(2).connect("hit_floor", self, "hit_floor_received")
 	get_parent().get_parent().get_child(2).get_child(2).connect("hit_floor", self, "hit_floor_received")
