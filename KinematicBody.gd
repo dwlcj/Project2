@@ -10,6 +10,7 @@ var camera
 var jumps = 2
 var prev_collided = false
 var coin_count = 0
+var in_ledge = false
 
 const SPEED = 10
 const ACCELERATION = 8
@@ -21,14 +22,32 @@ func _ready():
 	get_parent().get_parent().get_child(1).get_child(2).connect("hit_floor", self, "hit_floor_received")
 	get_parent().get_parent().get_child(2).get_child(2).connect("hit_floor", self, "hit_floor_received")
 	get_parent().get_parent().get_child(3).get_child(2).connect("hit_floor", self, "hit_floor_received")
+	
+	# sphere floor
 	get_parent().get_parent().get_child(4).get_child(1).connect("hit_floor", self, "hit_floor_received")
-	get_parent().get_parent().get_child(0).get_child(3).get_child(1).connect("coin_touched", self, "collect_coin")
-	get_parent().get_parent().get_child(1).get_child(3).get_child(1).connect("coin_touched", self, "collect_coin")
-	get_parent().get_parent().get_child(2).get_child(3).get_child(1).connect("coin_touched", self, "collect_coin")
-	get_parent().get_parent().get_child(3).get_child(3).get_child(1).connect("coin_touched", self, "collect_coin")
+	
+	get_parent().get_parent().get_child(0).get_child(3).get_child(0).get_child(1).connect("coin_touched", self, "collect_coin")
+	get_parent().get_parent().get_child(1).get_child(3).get_child(0).get_child(1).connect("coin_touched", self, "collect_coin")
+	get_parent().get_parent().get_child(2).get_child(3).get_child(0).get_child(1).connect("coin_touched", self, "collect_coin")
+	get_parent().get_parent().get_child(3).get_child(3).get_child(0).get_child(1).connect("coin_touched", self, "collect_coin")
+	
+	get_parent().get_parent().get_child(1).get_child(4).connect("hit_ledge", self, "hit_ledge_received")
+	get_parent().get_parent().get_child(1).get_child(4).connect("leave_ledge", self, "leave_ledge_received")
 
 func hit_floor_received():
 	jumps = 2
+	
+var first = true
+func hit_ledge_received():
+	if first:
+		first = false
+	else:
+		in_ledge = true
+	
+func leave_ledge_received():
+	in_ledge = false
+	jumps = 2
+	gravity = -9.8 * 3
 
 func collect_coin():
 	coin_count += 1
@@ -84,14 +103,19 @@ func _physics_process(delta):
 	velocity.x = hv.x
 	velocity.z = hv.z
 	
-	if Input.is_action_pressed("ui_shift"):
-		var kc = move_and_collide(velocity, true, true, true)
-		var collided = is_instance_valid(kc)
-		if not collided and prev_collided:
-			velocity.x = 0
-			velocity.z = 0
+	if Input.is_action_pressed("ui_shift") and not Input.is_action_pressed("ui_space"):
+		if in_ledge:
+			gravity = 0
+			velocity = Vector3(0, 0, 0)
+			jumps = 2
 		else:
-			velocity = move_and_slide(velocity, Vector3(0, 1, 0))
-			prev_collided = collided
+			gravity = -9.8 * 3
+			var kc = move_and_collide(velocity, true, true, true)
+			var collided = is_instance_valid(kc)
+			if not collided and prev_collided:
+				velocity = Vector3(0, 0, 0)
+			else:
+				velocity = move_and_slide(velocity, Vector3(0, 1, 0))
+				prev_collided = collided
 	else:
 		velocity = move_and_slide(velocity, Vector3(0, 1, 0))
