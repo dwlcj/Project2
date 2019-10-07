@@ -19,7 +19,7 @@ public:
 
 	void _ready();
 
-	void _on_button_pressed();
+	void _on_Button_pressed();
 };
 
 }
