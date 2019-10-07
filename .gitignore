@@ -3,6 +3,7 @@
 
 *.so
 *.os
+*.obj
 *.pdb
 *.idb
 *.lib
