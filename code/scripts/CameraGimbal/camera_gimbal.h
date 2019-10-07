@@ -4,6 +4,7 @@
 #include <Godot.hpp>
 #include <Sprite.hpp>
 #include <Spatial.hpp>
+#include <SceneTree.hpp>
 #include <Input.hpp>
 #include <InputEvent.hpp>
 #include <InputEventMouseMotion.hpp>
