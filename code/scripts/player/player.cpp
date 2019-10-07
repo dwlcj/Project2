@@ -13,8 +13,9 @@ void Player::_register_methods() {
 
 	register_signal<Player>("coin_collected", "node", GODOT_VARIANT_TYPE_OBJECT);
 
+	register_method("_ready", &Player::_ready);
 	register_method("hit_floor_received", &Player::hit_floor_received);
-	register_method("leave_floor_received", &Player::leave_floor_received);
+	register_method("hit_ledge_received", &Player::hit_ledge_received);
 	register_method("leave_ledge_received", &Player::leave_ledge_received);
 	register_method("collect_coin", &Player::collect_coin);
 	register_method("_process", &Player::_process);
@@ -25,11 +26,12 @@ GlobalConstants* gc;
 Input* input;
 
 void Player::_init() {
-	gc = GlobalConstants::get_singleton();
-	input = Input::get_singleton();
 }
 
 void Player::_ready() {
+	gc = GlobalConstants::get_singleton();
+	input = Input::get_singleton();
+
 	camera = Object::cast_to<Spatial>(get_node("../OuterGimbal/InnerGimbal/Camera"))->get_global_transform();
 	get_parent()->get_parent()->get_child(0)->get_child(2)->connect("hit_floor", this, "hit_floor_received");
 	get_parent()->get_parent()->get_child(1)->get_child(2)->connect("hit_floor", this, "hit_floor_received");
@@ -53,11 +55,11 @@ void Player::hit_floor_received() {
 }
 
 bool first = true;
-void Player::leave_floor_received() {
+void Player::hit_ledge_received() {
 	if (first) {
 		first = false;
 	} else {
-		in_ledge = false;
+		in_ledge = true;
 	}
 }
 
@@ -122,7 +124,7 @@ void Player::_physics_process(float delta) {
 
 	if (input->is_action_just_pressed("ui_space") && jumps > 0) {
 		if (sfx > 0) {
-			Object::cast_to<AudioStreamPlayer3D>(get_parent()->get_node("jump"))->play(0);
+			Object::cast_to<AudioStreamPlayer3D>(get_parent()->get_node("Jump"))->play(0);
 		}
 		jumps--;
 		velocity.y = 10;

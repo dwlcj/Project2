@@ -34,7 +34,7 @@ public:
 	void _ready();
 
 	void hit_floor_received();
-	void leave_floor_received();
+	void hit_ledge_received();
 	void leave_ledge_received();
 	void collect_coin();
 	void _process(float);

@@ -43,13 +43,13 @@ void CameraGimbal::_input(InputEvent *event) {
         {
             int dir = invert_y ? 1 : -1;
             //float y_rotation;
-            Godot::print("relative y is not 0");
+            //Godot::print("relative y is not 0");
             Spatial* inner_gimbal = Object::cast_to<Spatial>(this->get_child(0));
             Vector3 RIGHT = Vector3(1, 0, 0);
             real_t rotationAngle = dir * mouse_event->get_relative().y * 0.005f;
-            Godot::print(mouse_event->get_relative());
+            //Godot::print(mouse_event->get_relative());
             Vector2 test = Vector2(dir, mouse_sensitivity);
-            Godot::print(test);
+            //Godot::print(test);
             inner_gimbal->rotate_object_local(RIGHT, rotationAngle);
         }
     }
