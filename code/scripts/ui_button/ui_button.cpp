@@ -16,7 +16,7 @@ void UIButton::_ready() {
 }
 
 void UIButton::_on_button_pressed() {
-    //GetTree().change_scene("res:://Main.tscn");
+    this->get_tree()->change_scene("res:://Main.tscn");
 }
 
 

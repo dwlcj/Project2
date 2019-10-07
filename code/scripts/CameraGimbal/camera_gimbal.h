@@ -7,6 +7,7 @@
 #include <Input.hpp>
 #include <InputEvent.hpp>
 #include <InputEventMouseMotion.hpp>
+#include <KinematicBody.hpp>
 
 namespace godot {
 
@@ -26,7 +27,7 @@ public:
 
     void _ready();
 
-    void _input(InputEvent event);
+    void _input(InputEvent *event);
 
     void _process(float delta);
 };
