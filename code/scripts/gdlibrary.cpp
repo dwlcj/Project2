@@ -3,6 +3,7 @@
 #include "CoinObject/coin_object.h"
 #include "ledge/ledge.h"
 #include "floor_area/floor_area.h"
+#include "player/player.h"
 #include "goal/goal.h"
 #include "coin/coin.h"
 
@@ -21,6 +22,7 @@ extern "C" void GDN_EXPORT godot_nativescript_init(void *handle) {
 	godot::register_class<godot::CoinObject>();
 	godot::register_class<godot::Ledge>();
 	godot::register_class<godot::Floor_Area>();
+	godot::register_class<godot::Player>();
 	godot::register_class<godot::Goal>();
 	godot::register_class<godot::Coin>();
 }
