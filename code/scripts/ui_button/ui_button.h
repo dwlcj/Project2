@@ -4,6 +4,8 @@
 #include <Godot.hpp>
 #include <Sprite.hpp>
 #include <Button.hpp>
+#include <Input.hpp>
+#include <SceneTree.hpp>
 
 namespace godot {
 
@@ -14,6 +16,10 @@ public:
 	static void _register_methods();
 
 	static void _init();
+
+	void _ready();
+
+	void _on_button_pressed();
 };
 
 }
