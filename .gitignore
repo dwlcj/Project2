@@ -1,3 +1,11 @@
+.vscode
+.sconsign.dblite
+
 *.so
 *.os
-.sconsign.dblite
+*.pdb
+*.idb
+*.lib
+*.ilk
+*.dll
+*.exp
