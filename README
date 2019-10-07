@@ -1,0 +1,9 @@
+How to build:
+
+1) Build `godot-cpp` bindings
+- cd code/godot-cpp
+- scons platform=linux generate_bindings=yes
+
+2) Build game scripts
+- cd code
+- scons platform=linux

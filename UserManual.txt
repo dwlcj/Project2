@@ -1,0 +1,20 @@
+-------
+-About-
+-------
+
+This game is a simple third-person platformer - the goal is to collect as many
+coins as possible, and reach the end of the level.
+
+----------
+-Movement-
+----------
+W and S move your character forwards and backwards, while A and D strafe left
+and right. Within the Godot editor, another mode can be toggled that allows
+A and D to rotate your character instead of strafe.
+
+Jumping and double jumping are accomplished with the space bar. You have a max
+of two jumps from any floor: this means if you are sliding off a surface you
+cannot walk up (i.e. it's too steep), you still have two jumps to recover back
+to another walkable floor or the end.
+
+Some platforms are going to be too far to reach - gliding 
