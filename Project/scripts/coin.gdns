@@ -4,5 +4,5 @@
 
 [resource]
 resource_name = "scripts"
-class_name = "CameraGimbal"
+class_name = "Coin"
 library = ExtResource( 1 )
