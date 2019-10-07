@@ -1,6 +1,10 @@
 .vscode
 .sconsign.dblite
 
+x11/
+win64/
+osx/
+
 *.so
 *.os
 *.obj
