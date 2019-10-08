@@ -7,3 +7,7 @@ How to build:
 2) Build game scripts
 - cd code
 - scons platform=linux
+
+3) Run game in Godot
+
+Alternatively, the project has been exported to the `bin/` directory.
