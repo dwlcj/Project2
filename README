@@ -1,6 +1,7 @@
 How to build:
 
 1) Build `godot-cpp` bindings
+- git submodule update --init --recursive
 - cd code/godot-cpp
 - scons platform=linux generate_bindings=yes
 
