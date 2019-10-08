@@ -154,12 +154,12 @@ void Player::_physics_process(float delta) {
 			gravity = -9.8 * 3;
 			auto kc = move_and_collide(velocity, true, true, true);
 			auto collided = kc.is_valid();
-			if (!collided && prev_collided) {
-				velocity = Vector3();
+			if (!collided && is_on_floor()) {
+				velocity = Vector3(0, 0, 0);
 			} else {
 				velocity = move_and_slide(velocity, Vector3(0, 1, 0));
-				prev_collided = collided;
 			}
+			prev_collided = collided;
 		}
 	} else {
 		auto kc = move_and_collide(velocity, true, true, true);
