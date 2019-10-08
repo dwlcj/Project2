@@ -3,11 +3,11 @@ How to build:
 1) Build `godot-cpp` bindings
 - git submodule update --init --recursive
 - cd code/godot-cpp
-- scons platform=linux generate_bindings=yes
+- scons platform=<your_platform> generate_bindings=yes
 
 2) Build game scripts
 - cd code
-- scons platform=linux
+- scons platform=<your_platform>
 
 3) Run game in Godot
 
