@@ -22,7 +22,6 @@ private:
 	Transform camera;
 	int jumps = 2;
 	bool prev_collided = false;
-	int coin_count = 0;
 	bool in_ledge = false;
 	int sfx = 1;
 

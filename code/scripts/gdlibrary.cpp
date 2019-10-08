@@ -6,6 +6,7 @@
 #include "player/player.h"
 #include "goal/goal.h"
 #include "coin/coin.h"
+#include "CoinCountGUI/coin_count_GUI.h"
 
 extern "C" void GDN_EXPORT godot_gdnative_init(godot_gdnative_init_options *o) {
 	godot::Godot::gdnative_init(o);
@@ -25,4 +26,5 @@ extern "C" void GDN_EXPORT godot_nativescript_init(void *handle) {
 	godot::register_class<godot::Player>();
 	godot::register_class<godot::Goal>();
 	godot::register_class<godot::Coin>();
+	godot::register_class<godot::CoinCountGUI>();
 }

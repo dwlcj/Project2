@@ -69,8 +69,7 @@ void Player::leave_ledge_received() {
 }
 
 void Player::collect_coin() {
-	coin_count++;
-	emit_signal("coin_collected", coin_count);
+	emit_signal("coin_collected");
 }
 
 void Player::_process(float delta) {

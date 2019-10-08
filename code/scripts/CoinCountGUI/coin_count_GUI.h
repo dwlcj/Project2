@@ -3,8 +3,8 @@
 
 #include <Godot.hpp>
 #include <Sprite.hpp>
-#include <Button.hpp>
 #include <Input.hpp>
+#include <Control.hpp>
 
 namespace godot {
 
@@ -18,7 +18,7 @@ public:
 
 	void _ready();
 
-	void _on_button_pressed();
+	void increment_coin_label();
 };
 
 }
