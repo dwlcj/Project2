@@ -15,5 +15,5 @@ void Goal::_init() {
 }
 
 void Goal::_on_Area_body_entered(Variant) {
-	get_tree()->change_scene("res://GameOverScreen.tscn");
+	get_tree()->change_scene("res://WinScreen.tscn");
 } 
