@@ -29,7 +29,8 @@ pressing the ctrl key while in midair
 ----------------------
 
 The mouse is used to control the camera. The camera orbits around the character
-in 3rd person.
+in 3rd person. because the mouse is captured during this, press the esc key to 
+exit the game.
 
 The N and M keys are used to toggle sound effects, while the comma(,) and period(.)
 keys toggle the background music.
