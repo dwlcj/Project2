@@ -1,1 +1,13 @@
-test
+Final Project Report
+Team Bismark
+
+All in all this project went pretty well. We decided to do the whole project in GDScript and then 
+convert it all into GDNative. This approach worked pretty well, but it was a little difficult 
+having to figure out the equivalents of the GDScript methods and such. It took some time 
+having to convert over and we had some issues, but in the end we got it all working. Going forward
+from now we will be working in GDNative from the start.
+
+We were able to implement all of the requested features thankfully. The only thing that doesn't 
+meet the requirements 100% is that the camera doesn't hide or dither objects between the character
+and itself. We couldn't figure out how to do this and we decided that devoting time to this would
+prevent us from finishing other features on time and thus the entire project on time. 
