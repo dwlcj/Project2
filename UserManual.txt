@@ -17,4 +17,19 @@ of two jumps from any floor: this means if you are sliding off a surface you
 cannot walk up (i.e. it's too steep), you still have two jumps to recover back
 to another walkable floor or the end.
 
-Some platforms are going to be too far to reach - gliding 
+Ledge hanging can be performed by pressing the shift key while in contact with
+a ledge. Doing so will hold the character in place, with jumps replenished. 
+Shift also enables Ledge Stop if held while in contact with a floor.
+
+Some platforms are going to be too far to reach - gliding can be performed by 
+pressing the ctrl key while in midair
+
+----------------------
+-Camera/Sound Control-
+----------------------
+
+The mouse is used to control the camera. The camera orbits around the character
+in 3rd person.
+
+The N and M keys are used to toggle sound effects, while the comma(,) and period(.)
+keys toggle the background music.
