@@ -16,7 +16,25 @@ void UIButton::_ready() {
 }
 
 void UIButton::_on_Button_pressed() {
-    get_tree()->change_scene("res://Main.tscn");
+    if(get_text().nocasecmp_to("PLAY") == 0)
+    {
+        get_tree()->change_scene("res://Main.tscn");
+    }
+    else if(get_text().nocasecmp_to("Create Server") == 0)
+    {
+        get_parent()->get_node("StatusLabel")->set("text", "Multiplayer Host");
+    }
+    else if(get_text().nocasecmp_to("Join Server") == 0)
+    {
+        get_parent()->get_node("StatusLabel")->set("text", "Multiplayer Client");
+    }
+    else if(get_text().nocasecmp_to("Leave Server") == 0)
+    {
+        get_parent()->get_node("StatusLabel")->set("text", "Singleplayer");
+    }   
+
+
+    
 }
 
 
