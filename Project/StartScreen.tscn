@@ -1,8 +1,8 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Some Time Later.otf" type="DynamicFontData" id=1]
-[ext_resource path="res://scripts/ui_button.gdns" type="Script" id=2]
-[ext_resource path="res://Button.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Button.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scripts/network_button.gdns" type="Script" id=3]
 
 [sub_resource type="DynamicFont" id=1]
 size = 100
@@ -10,17 +10,7 @@ extra_spacing_top = -28
 extra_spacing_bottom = -7
 font_data = ExtResource( 1 )
 
-[sub_resource type="DynamicFont" id=2]
-font_data = ExtResource( 1 )
-
-[sub_resource type="DynamicFont" id=3]
-font_data = ExtResource( 1 )
-
 [sub_resource type="DynamicFont" id=4]
-size = 25
-font_data = ExtResource( 1 )
-
-[sub_resource type="DynamicFont" id=5]
 size = 25
 font_data = ExtResource( 1 )
 
@@ -54,49 +44,16 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Button" parent="." instance=ExtResource( 3 )]
+[node name="Button" parent="." instance=ExtResource( 2 )]
 margin_top = 465.768
 margin_bottom = 498.768
 text = "PLAY"
 
-[node name="CreateButton" type="Button" parent="."]
-margin_left = 27.7368
-margin_top = 62.6842
-margin_right = 157.737
-margin_bottom = 118.684
-rect_pivot_offset = Vector2( 227.368, -79.4737 )
-custom_fonts/font = SubResource( 2 )
-text = "Create Server"
-script = ExtResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="JoinButton" type="Button" parent="."]
-margin_left = 28.4211
-margin_top = 137.579
-margin_right = 151.421
-margin_bottom = 196.579
-rect_pivot_offset = Vector2( 227.368, -79.4737 )
-custom_fonts/font = SubResource( 3 )
-text = "Join Server"
-script = ExtResource( 2 )
-
-[node name="LeaveButton" type="Button" parent="."]
-margin_left = 29.4737
-margin_top = 219.684
-margin_right = 152.474
-margin_bottom = 278.684
-rect_pivot_offset = Vector2( 227.368, -79.4737 )
-custom_fonts/font = SubResource( 3 )
-text = "Leave Server"
-script = ExtResource( 2 )
-
 [node name="StatusHeaderLabel" type="Label" parent="."]
-margin_left = 23.0
-margin_top = 17.0
-margin_right = 185.0
-margin_bottom = 47.0
+margin_left = 730.368
+margin_top = 31.7368
+margin_right = 892.368
+margin_bottom = 61.7368
 custom_fonts/font = SubResource( 4 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Server Status: "
@@ -104,18 +61,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="StatusLabel" type="Label" parent="."]
-margin_left = 186.474
-margin_top = 15.1579
-margin_right = 502.474
-margin_bottom = 70.1579
-custom_fonts/font = SubResource( 5 )
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "Single PLayer
-"
+[node name="NetworkChooseLabel" type="OptionButton" parent="."]
+margin_left = 729.158
+margin_top = 70.8947
+margin_right = 997.158
+margin_bottom = 131.895
+script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-[connection signal="pressed" from="CreateButton" to="CreateButton" method="_on_Button_pressed"]
-[connection signal="pressed" from="JoinButton" to="JoinButton" method="_on_Button_pressed"]
-[connection signal="pressed" from="LeaveButton" to="LeaveButton" method="_on_Button_pressed"]
