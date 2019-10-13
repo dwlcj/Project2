@@ -10,7 +10,7 @@ extra_spacing_top = -28
 extra_spacing_bottom = -7
 font_data = ExtResource( 1 )
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=2]
 size = 25
 font_data = ExtResource( 1 )
 
@@ -54,7 +54,7 @@ margin_left = 730.368
 margin_top = 31.7368
 margin_right = 892.368
 margin_bottom = 61.7368
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Server Status: "
 __meta__ = {

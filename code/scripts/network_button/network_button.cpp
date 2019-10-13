@@ -16,4 +16,5 @@ void NetworkButton::_ready() {
     add_item("Singleplayer");
     add_item("Create Server");
     add_item("Join Server");
+    select(0);
 }
