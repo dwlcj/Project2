@@ -1,33 +1,41 @@
-#ifndef NETWORK_H
-#define NETWORK_H
-
+#pragma once
 #include <Node.hpp>
+
 #include <Godot.hpp>
 
-namespace godot {
+namespace godot
+{
 
-class Network : public Node {
-	GODOT_CLASS(Network, Node)
-
-	Dictionary selfData;
-	Dictionary players;
+class Network : public Node
+{
+    GODOT_CLASS(Network, Node)
 
 public:
-	static void _register_methods();
+    static void _register_methods();
 
-	static void _init();
+    Network();
+    ~Network();
 
-	void _ready();
+    void _init();
+    void _ready();
 
-	void create_server(String);
-	void connect_to_server(String);
+    void create_server(String playerNickname);
+    void connect_to_server(String playerNickname);
+    void _connected_to_server();
+    void _on_player_disconnected(int64_t id);
+    void _on_player_connected(int64_t connectedPlayerId);
+    void _request_player_info(int64_t requestFromId, int64_t playerId);
+    void _request_players(int64_t requestFromId);
+    void _send_player_info(int64_t id, Dictionary info);
+    void update_position(int64_t id, Vector2 position);
 
-	void _on_player_connected(int64_t id);
-	void _on_player_disconnected(int64_t id);
-	void _connected_to_server();
-	void _send_player_info(int64_t, Dictionary);
+private:
+    const String SERVER_IP = "127.0.0.1";
+    const int64_t SERVER_PORT = 31400;
+    const int64_t MAX_PLAYERS = 5;
+    Dictionary selfData;
+    Dictionary players;
 };
 
 }
 
-#endif

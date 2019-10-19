@@ -1,68 +1,116 @@
 #include "network.h"
-
 #include <SceneTree.hpp>
 #include <NetworkedMultiplayerENet.hpp>
 
 using namespace godot;
 
-void Network::_register_methods() {
-    register_method("_ready", &Network::_ready);
-
-
+void Network::_register_methods()
+{
+    register_method("_init", &Network::_init, GODOT_METHOD_RPC_MODE_DISABLED);
+    register_method("_ready", &Network::_ready, GODOT_METHOD_RPC_MODE_DISABLED);
     register_method("create_server", &Network::create_server, GODOT_METHOD_RPC_MODE_DISABLED);
     register_method("connect_to_server", &Network::connect_to_server, GODOT_METHOD_RPC_MODE_DISABLED);
-
-    register_method("_on_player_connected", &Network::_on_player_connected);
-    register_method("_on_player_disconnected", &Network::_on_player_connected);
-    register_method("_connected_to_server", &Network::_connected_to_server);
-
+    register_method("_connected_to_server", &Network::_connected_to_server, GODOT_METHOD_RPC_MODE_DISABLED);
+    register_method("_on_player_disconnected", &Network::_on_player_disconnected, GODOT_METHOD_RPC_MODE_DISABLED);
+    register_method("_on_player_connected", &Network::_on_player_connected, GODOT_METHOD_RPC_MODE_DISABLED);
+    register_method("_request_player_info", &Network::_request_player_info, GODOT_METHOD_RPC_MODE_REMOTE);
+    register_method("_request_players", &Network::_request_players, GODOT_METHOD_RPC_MODE_REMOTE);
     register_method("_send_player_info", &Network::_send_player_info, GODOT_METHOD_RPC_MODE_REMOTE);
+    register_method("update_position", &Network::update_position, GODOT_METHOD_RPC_MODE_DISABLED);
+
+    register_property<Network, Dictionary>("selfData", &Network::selfData, Dictionary(), GODOT_METHOD_RPC_MODE_DISABLED);
+    register_property<Network, Dictionary>("players", &Network::players, Dictionary(), GODOT_METHOD_RPC_MODE_DISABLED);
 }
 
-void Network::_init() {}
+Network::Network()
+{
 
-void Network::_ready() {
-	get_tree()->connect("network_peer_connected", this, "_on_player_connected");
-	get_tree()->connect("network_peer_disconnected", this, "_on_player_disconnected");
-    create_server("test");
 }
 
-void Network::create_server(String username) {
-	selfData["username"] = username;
-	players[1] = selfData;
-	NetworkedMultiplayerENet* peer = NetworkedMultiplayerENet::_new();
-	peer->set_bind_ip("127.0.0.1");
-	peer->create_server(13123, 3);
-	get_tree()->set_network_peer(peer);
-    Godot::print("created server");
+Network::~Network()
+{
+
 }
 
-void Network::connect_to_server(String username) {
-    selfData["username"] = username;
+void Network::_init()
+{
+    selfData["name"] = "";
+    selfData["position"] = Vector2(360, 180);
+}
+
+void Network::_ready()
+{
+    get_tree()->connect("network_peer_disconnected", this, "_on_player_disconnected");
+    get_tree()->connect("network_peer_connected", this, "_on_player_connected");
+    create_server("noviv");
+}
+
+void Network::create_server(String playerNickname)
+{
+    selfData["name"] = playerNickname;
+    players[1] = selfData;
+    NetworkedMultiplayerENet* peer = NetworkedMultiplayerENet::_new();
+    peer->create_server(SERVER_PORT, MAX_PLAYERS);
+    get_tree()->set_network_peer(peer);
+    Godot::print("created");
+}
+
+void Network::connect_to_server(String playerNickname)
+{
+    selfData["name"] = playerNickname;
     get_tree()->connect("connected_to_server", this, "_connected_to_server");
     NetworkedMultiplayerENet* peer = NetworkedMultiplayerENet::_new();
-    peer->create_client("127.0.0.1", 13123);
+    peer->create_client(SERVER_IP, SERVER_PORT);
     get_tree()->set_network_peer(peer);
 }
 
-void Network::_on_player_connected(int64_t id) {
-	Godot::print(String(id));
-}
-
-void Network::_on_player_disconnected(int64_t id) {
-	Godot::print(String(id));
-}
-
-void Network::_connected_to_server() {
+void Network::_connected_to_server()
+{
     int64_t localPlayerId = get_tree()->get_network_unique_id();
     players[localPlayerId] = selfData;
-    rpc("_send_player_info", localPlayerId, selfData);
+    //rpc("_send_player_info", localPlayerId, selfData);
 }
 
-void Network::_send_player_info(int64_t id, Dictionary dict) {
-    players[id] = dict;
+void Network::_on_player_disconnected(int64_t id)
+{
+    players.erase(id);
+}
 
-	Godot::print("send_player_info");
+void Network::_on_player_connected(int64_t connectedPlayerId)
+{
+    std::cout << "Player connected to server" << std::endl;
+    int64_t localPlayerId = get_tree()->get_network_unique_id();
+    if(!get_tree()->is_network_server())
+    {
+        rpc_id(1, "_request_player_info", localPlayerId, connectedPlayerId);
+    }
+}
+
+void Network::_request_player_info(int64_t requestFromId, int64_t playerId)
+{
+    if(get_tree()->is_network_server())
+    {
+        rpc_id(requestFromId, "_send_player_info", playerId, players[playerId]);
+    }
+}
+
+void Network::_request_players(int64_t requestFromId)
+{
+    if(get_tree()->is_network_server())
+    {
+        for(int64_t peerId = 0; peerId < players.size(); peerId++)
+        {
+            if(peerId != requestFromId)
+            {
+                rpc_id(requestFromId, "_send_player_info", peerId, players[peerId]);
+            }
+        }
+    }
+}
+
+void Network::_send_player_info(int64_t id, Dictionary info)
+{
+    players[id] = info;
 
 /*    ResourceLoader* resourceLoader = ResourceLoader::get_singleton();
     PlayerScene = resourceLoader->load("res://player/Player.tscn");
@@ -72,3 +120,10 @@ void Network::_send_player_info(int64_t id, Dictionary dict) {
     get_node("/root/Game")->add_child(player);
     player->init(info["name"], info["position"], true);*/
 }
+
+void Network::update_position(int64_t id, Vector2 position)
+{
+    Dictionary playerInfo = players[id];
+    playerInfo["position"] = position;
+}
+
