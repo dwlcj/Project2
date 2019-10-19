@@ -21,13 +21,11 @@ void UIButton::_on_Button_pressed() {
 	auto str = button->get_item_text(button->get_selected());
 
 	if (str == "Singleplayer") {
-		// do nothing
+		Godot::print("singleplayer");
 	} else if (str == "Create Server") {
 		Godot::print("create");
-		get_node("Network")->call("create_server", "noviv");
 	} else if (str == "Join Server") {
 		Godot::print("join");
-		get_node("Network")->call("connect_to_server", "noviv");
 	}
 	get_tree()->change_scene("res://Main.tscn");
 }

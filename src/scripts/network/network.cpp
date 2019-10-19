@@ -1,6 +1,8 @@
 #include "network.h"
 #include <SceneTree.hpp>
 #include <NetworkedMultiplayerENet.hpp>
+#include <filesystem>
+#include <fstream>
 
 using namespace godot;
 
@@ -42,7 +44,14 @@ void Network::_ready()
 {
     get_tree()->connect("network_peer_disconnected", this, "_on_player_disconnected");
     get_tree()->connect("network_peer_connected", this, "_on_player_connected");
-    create_server("noviv");
+    std::fstream datafile("data.txt");
+    int type;
+    datafile >> type;
+    if (type == 1) {
+        create_server("noviv");
+    } else if (type == 2) {
+        connect_to_server("test");
+    }
 }
 
 void Network::create_server(String playerNickname)
@@ -50,6 +59,7 @@ void Network::create_server(String playerNickname)
     selfData["name"] = playerNickname;
     players[1] = selfData;
     NetworkedMultiplayerENet* peer = NetworkedMultiplayerENet::_new();
+    peer->set_bind_ip("*");
     peer->create_server(SERVER_PORT, MAX_PLAYERS);
     get_tree()->set_network_peer(peer);
     Godot::print("created");
