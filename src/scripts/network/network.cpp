@@ -24,15 +24,17 @@ void Network::_init() {}
 void Network::_ready() {
 	get_tree()->connect("network_peer_connected", this, "_on_player_connected");
 	get_tree()->connect("network_peer_disconnected", this, "_on_player_disconnected");
+    create_server("test");
 }
 
 void Network::create_server(String username) {
 	selfData["username"] = username;
 	players[1] = selfData;
 	NetworkedMultiplayerENet* peer = NetworkedMultiplayerENet::_new();
-	peer->set_bind_ip("*");
+	peer->set_bind_ip("127.0.0.1");
 	peer->create_server(13123, 3);
 	get_tree()->set_network_peer(peer);
+    Godot::print("created server");
 }
 
 void Network::connect_to_server(String username) {
