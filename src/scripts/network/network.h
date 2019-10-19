@@ -2,6 +2,7 @@
 #include <Node.hpp>
 
 #include <Godot.hpp>
+#include <PackedScene.hpp>
 
 namespace godot
 {
@@ -35,6 +36,7 @@ private:
     const int64_t MAX_PLAYERS = 5;
     Dictionary selfData;
     Dictionary players;
+    Ref<PackedScene> PlayerScene;
 };
 
 }

@@ -3,6 +3,8 @@
 #include <NetworkedMultiplayerENet.hpp>
 #include <filesystem>
 #include <fstream>
+#include <ResourceLoader.hpp>
+#include "player/player.h"
 
 using namespace godot;
 
@@ -78,7 +80,7 @@ void Network::_connected_to_server()
 {
     int64_t localPlayerId = get_tree()->get_network_unique_id();
     players[localPlayerId] = selfData;
-    //rpc("_send_player_info", localPlayerId, selfData);
+    rpc("_send_player_info", localPlayerId, selfData);
 }
 
 void Network::_on_player_disconnected(int64_t id)
@@ -122,13 +124,12 @@ void Network::_send_player_info(int64_t id, Dictionary info)
 {
     players[id] = info;
 
-/*    ResourceLoader* resourceLoader = ResourceLoader::get_singleton();
-    PlayerScene = resourceLoader->load("res://player/Player.tscn");
+    ResourceLoader* resourceLoader = ResourceLoader::get_singleton();
+    PlayerScene = resourceLoader->load("res://NewPlayer.tscn");
     godot::Player* player = static_cast<godot::Player*>(PlayerScene->instance());
     player->set_name(String(id));
     player->set_network_master(id);
-    get_node("/root/Game")->add_child(player);
-    player->init(info["name"], info["position"], true);*/
+    get_parent()->add_child(player);
 }
 
 void Network::update_position(int64_t id, Vector2 position)

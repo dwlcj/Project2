@@ -1,5 +1,6 @@
 #include "ui_button.h"
 #include <OptionButton.hpp>
+#include <fstream>
 
 using namespace godot;
 
@@ -23,8 +24,12 @@ void UIButton::_on_Button_pressed() {
 	if (str == "Singleplayer") {
 		Godot::print("singleplayer");
 	} else if (str == "Create Server") {
+		std::ofstream file("data.txt");
+		file << "1";
 		Godot::print("create");
 	} else if (str == "Join Server") {
+		std::ofstream file("data.txt");
+		file << "2";
 		Godot::print("join");
 	}
 	get_tree()->change_scene("res://Main.tscn");
