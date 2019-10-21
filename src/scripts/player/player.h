@@ -15,8 +15,9 @@ private:
 	static const int ACCELERATION = 8;
 	static const int DE_ACCELERATION = 14;
 
-	bool strafe = true;
 
+	bool strafe = true;
+	Vector3 slavePosition;
 	double gravity = -9.8 * 3;
 	Vector3 velocity;
 	Transform camera;
@@ -38,6 +39,7 @@ public:
 	void collect_coin();
 	void _process(float);
 	void _physics_process(float);
+	bool is_base_player = true;
 };
 
 }

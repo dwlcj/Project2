@@ -5,6 +5,7 @@
 #include <fstream>
 #include <ResourceLoader.hpp>
 #include "player/player.h"
+#include <Camera.hpp>
 
 using namespace godot;
 
@@ -39,7 +40,7 @@ Network::~Network()
 void Network::_init()
 {
     selfData["name"] = "";
-    selfData["position"] = Vector2(360, 180);
+    selfData["position"] = Vector3(400, 40, 0);
 }
 
 void Network::_ready()
@@ -56,8 +57,11 @@ void Network::_ready()
     }
 }
 
+int64_t origin_id;
+
 void Network::create_server(String playerNickname)
 {
+    origin_id = 1;
     selfData["name"] = playerNickname;
     players[1] = selfData;
     NetworkedMultiplayerENet* peer = NetworkedMultiplayerENet::_new();
@@ -65,6 +69,11 @@ void Network::create_server(String playerNickname)
     peer->create_server(SERVER_PORT, MAX_PLAYERS);
     get_tree()->set_network_peer(peer);
     Godot::print("created");
+    
+    get_parent()->print_tree();
+    auto* player = Object::cast_to<Player>(get_node("../Spatial"));
+    player->set_name(String(get_tree()->get_network_unique_id()));
+    player->set_network_master(get_tree()->get_network_unique_id());
 }
 
 void Network::connect_to_server(String playerNickname)
@@ -79,6 +88,7 @@ void Network::connect_to_server(String playerNickname)
 void Network::_connected_to_server()
 {
     int64_t localPlayerId = get_tree()->get_network_unique_id();
+    origin_id = localPlayerId;
     players[localPlayerId] = selfData;
     rpc("_send_player_info", localPlayerId, selfData);
 }
@@ -126,13 +136,24 @@ void Network::_send_player_info(int64_t id, Dictionary info)
 
     ResourceLoader* resourceLoader = ResourceLoader::get_singleton();
     PlayerScene = resourceLoader->load("res://NewPlayer.tscn");
+    Godot::print("loaded newplayer");
     godot::Player* player = static_cast<godot::Player*>(PlayerScene->instance());
     player->set_name(String(id));
     player->set_network_master(id);
+    player->is_base_player = id == origin_id;
+    if (id == origin_id) {
+        Godot::print("adding base player");
+    }
     get_parent()->add_child(player);
+
+    auto* l0 = get_parent();
+    auto* l1 = l0->get_node("Spatial");
+    auto* l2 = l1->get_node("./OuterGimbal/InnerGimbal/Camera");
+    auto* camera = Object::cast_to<Camera>(l2);
+    camera->make_current();
 }
 
-void Network::update_position(int64_t id, Vector2 position)
+void Network::update_position(int64_t id, Vector3 position)
 {
     Dictionary playerInfo = players[id];
     playerInfo["position"] = position;

@@ -22,6 +22,8 @@ void UIButton::_on_Button_pressed() {
 	auto str = button->get_item_text(button->get_selected());
 
 	if (str == "Singleplayer") {
+		std::ofstream file("data.txt");
+		file << "1";
 		Godot::print("singleplayer");
 	} else if (str == "Create Server") {
 		std::ofstream file("data.txt");

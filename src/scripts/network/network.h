@@ -28,7 +28,7 @@ public:
     void _request_player_info(int64_t requestFromId, int64_t playerId);
     void _request_players(int64_t requestFromId);
     void _send_player_info(int64_t id, Dictionary info);
-    void update_position(int64_t id, Vector2 position);
+    void update_position(int64_t id, Vector3 position);
 
 private:
     const String SERVER_IP = "127.0.0.1";
