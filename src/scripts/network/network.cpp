@@ -47,6 +47,7 @@ void Network::_ready()
 {
     get_tree()->connect("network_peer_disconnected", this, "_on_player_disconnected");
     get_tree()->connect("network_peer_connected", this, "_on_player_connected");
+
     std::fstream datafile("data.txt");
     int type;
     datafile >> type;
@@ -69,11 +70,11 @@ void Network::create_server(String playerNickname)
     peer->create_server(SERVER_PORT, MAX_PLAYERS);
     get_tree()->set_network_peer(peer);
     Godot::print("created");
-    
+
     get_parent()->print_tree();
-    auto* player = Object::cast_to<Player>(get_node("../Spatial"));
-    player->set_name(String(get_tree()->get_network_unique_id()));
-    player->set_network_master(get_tree()->get_network_unique_id());
+    auto* player = get_parent()->get_node("Spatial");
+    // player->set_name(String(peer->get_unique_id()));
+    // player->set_network_master(peer->get_unique_id());
 }
 
 void Network::connect_to_server(String playerNickname)
@@ -147,6 +148,9 @@ void Network::_send_player_info(int64_t id, Dictionary info)
     get_parent()->add_child(player);
 
     auto* l0 = get_parent();
+    Godot::print(">---------------");
+    l0->print_tree();
+    Godot::print("<---------------");
     auto* l1 = l0->get_node("Spatial");
     auto* l2 = l1->get_node("./OuterGimbal/InnerGimbal/Camera");
     auto* camera = Object::cast_to<Camera>(l2);
@@ -158,4 +162,3 @@ void Network::update_position(int64_t id, Vector3 position)
     Dictionary playerInfo = players[id];
     playerInfo["position"] = position;
 }
-
