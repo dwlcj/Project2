@@ -74,7 +74,7 @@ void Network::create_server(String playerNickname)
     get_parent()->print_tree();
     auto* player = get_parent()->get_node("Spatial");
     // player->set_name(String(peer->get_unique_id()));
-    // player->set_network_master(peer->get_unique_id());
+    player->set_network_master(peer->get_unique_id());
 }
 
 void Network::connect_to_server(String playerNickname)
@@ -84,6 +84,9 @@ void Network::connect_to_server(String playerNickname)
     NetworkedMultiplayerENet* peer = NetworkedMultiplayerENet::_new();
     peer->create_client(SERVER_IP, SERVER_PORT);
     get_tree()->set_network_peer(peer);
+    auto* player = get_parent()->get_node("Spatial");
+    // player->set_name(String(peer->get_unique_id()));
+    player->set_network_master(peer->get_unique_id());
 }
 
 void Network::_connected_to_server()

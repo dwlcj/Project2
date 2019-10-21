@@ -58,6 +58,7 @@ void Player::_ready() {
 	get_parent()->get_parent()->get_child(1)->get_child(4)->connect("hit_ledge", this, "hit_ledge_received");
 	get_parent()->get_parent()->get_child(1)->get_child(4)->connect("leave_ledge", this, "leave_ledge_received");
 	set_translation(Vector3(0,6,0));
+	slavePosition = Vector3(0,6,0);
 }
 
 void Player::hit_floor_received() {
@@ -182,7 +183,7 @@ void Player::_physics_process(float delta) {
 				velocity = move_and_slide(velocity, Vector3(0, 1, 0));
 			}
 		}
-		rset_unreliable("slavePosition", get_translation());
+		//rset_unreliable("slavePosition", get_translation());
 	}
 	else{
 		set_translation(slavePosition);
