@@ -1,3 +1,5 @@
+Project #3
+
 -------
 -About-
 -------
@@ -32,5 +34,14 @@ The mouse is used to control the camera. The camera orbits around the character
 in 3rd person. because the mouse is captured during this, press the esc key to 
 exit the game.
 
-The N and M keys are used to toggle sound effects, while the comma(,) and period(.)
-keys toggle the background music.
+The N and M keys are used to toggle sound effects, while the comma(,) and
+period(.) keys toggle the background music.
+
+-------------
+-Multiplayer-
+-------------
+The initial UI has a selector on the top-right that enables selection of a
+different mode. Singleplayer is the default option, which will not start a new
+server. "Create server" will make this instance the host and has a higher
+network resource requirement. "Join server" will simply join a local game on a
+hardcoded port and treats the running instance as a client.

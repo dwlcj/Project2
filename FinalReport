@@ -1,13 +1,54 @@
-Final Project Report
+Final Project #3 Report
 Team Bismark
 
-All in all this project went pretty well. We decided to do the whole project in GDScript and then 
-convert it all into GDNative. This approach worked pretty well, but it was a little difficult 
-having to figure out the equivalents of the GDScript methods and such. It took some time 
-having to convert over and we had some issues, but in the end we got it all working. Going forward
-from now we will be working in GDNative from the start.
+This project did not go nearly as well as we had envisioned, so this report
+will be more a post-mortem than a review.
 
-We were able to implement all of the requested features thankfully. The only thing that doesn't 
-meet the requirements 100% is that the camera doesn't hide or dither objects between the character
-and itself. We couldn't figure out how to do this and we decided that devoting time to this would
-prevent us from finishing other features on time and thus the entire project on time. 
+Originally, we had all attended class and knew the basics of what had to
+change in our game to make it multiplayer. This involved mapping out
+exactly which components should be networked, which properties should be
+(un)reliable, and how to transition between singleplayer and multiplayer.
+At a high level, we knew what had to be done and were feeling confident
+by the time the milestone was submitted.
+
+The milestone had the basics for a network structure, and had a clear UI
+transition from single to multiplayer. We assumed the implementation of
+networking would be simple, bottlenecked only by expanding the demo
+projects' property syncing to a couple of our nodes (Coin, Player velocity,
+Player rotation, end state). This was a horrible misjudgement of our time
+and of the overall state of documentation/support in official docs, online,
+and IRL for Godot's C++ networking bindings.
+
+Even as we attempted to mirror the demo project's simple, we hit roadblocks
+simply trying to create a server - we could not connect across devices for
+some (still unknown) reason, the C++ bindings had undocumented parameters like
+GODOT_METHOD_RPC_MODE_REMOTE, and most of our attempts at searching for
+Godot errors directed us to "resolved" Godot engine issues (dead ends).
+Furthermore, the code we were building on - Assignment 1's code - was not
+very well structured and thus we made no attempt to refactor it before
+proceeding with this assignment. The majority of our time after our first pass
+at networking was spent working through this technical debt, on top of
+figuring out the C++ networking calls through compiler errors (not Google or
+stable documentation). The most frusturating part was that we knew exactly
+what we needed to do and how to talk about it with the professor, but could
+not translate that into C++ because of the limited documentation and
+understanding of Godot-specific language. Every time we thought we had made
+progress, another component of our system broke. We even discussed at one point
+jumping ship and setting up our own TCP/UDP connection since some of our
+team already had experience with C++ socket programming. Each of these
+roadblocks combined resulted in overall group frusturatoin with this project,
+Godot, and Godot's support ecosystem (online documentation, stackoverflow,
+github issues, etc) - we knew exactly what needed to be done at a high level,
+but were constrained by Godot.
+
+While we do understand some headaches could have been avoided by working more
+on the first milestone, we believe that this project would be just as
+unreachable had we started being frusturated a week earlier. It's been a week
+since the milestone and we still have a limited understanding about how and why
+Godot's networking works. The two week timeframe was simply not enough
+time to build off of bad software, learn a foreign and poorly documented
+networking framework, and build a stable-enough multiplayer game (for us).
+We have decided that the next project will build off of our singleplayer game
+to avoid building off of even more technical debt, so that we can deliver a
+game with mediocre AI/NPCs. Wasting more time on Godot's networking would
+likely just drain our time, efforts, and resources without much to gain.
