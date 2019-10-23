@@ -39,6 +39,7 @@ public:
 	void collect_coin();
 	void _process(float);
 	void _physics_process(float);
+	void end_game();
 	bool is_base_player = true;
 };
 

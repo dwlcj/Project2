@@ -16,6 +16,7 @@ namespace godot {
 		static void _register_methods();
 		static void _init();
 		void _on_Area_body_entered(Variant);
+		void end_game();
 		 
 
 	};
