@@ -52,3 +52,11 @@ We have decided that the next project will build off of our singleplayer game
 to avoid building off of even more technical debt, so that we can deliver a
 game with mediocre AI/NPCs. Wasting more time on Godot's networking would
 likely just drain our time, efforts, and resources without much to gain.
+
+On a more positive note, we did manage to get a client to connect to a server
+on the same device. On connection a new player is added and is affected by gravity.
+When one player falls off the edge or reaches the goal the other player 
+experiences the scene change associated with that because it is sent accross
+the network. We were close to figuring out having players update movement across
+the network, but it never panned out quite right due to the previously mentioned
+issues.

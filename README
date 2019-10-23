@@ -6,7 +6,7 @@ How to build:
 - scons platform=<your_platform> generate_bindings=yes
 
 2) Build game scripts
-- cd code
+- make sure you're in the top level folder
 - scons platform=<your_platform>
 
 3) Run game in Godot
