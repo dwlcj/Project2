@@ -22,6 +22,7 @@ void Player::_register_methods() {
 	register_method("collect_coin", &Player::collect_coin);
 	register_method("_process", &Player::_process);
 	register_method("_physics_process", &Player::_physics_process);
+	register_method("end_game", &Player::end_game, GODOT_METHOD_RPC_MODE_REMOTE);
 }
 
 GlobalConstants* gc;
@@ -95,6 +96,7 @@ void Player::_process(float delta) {
 	}
 
 	if (get_translation().y < -20) {
+		rpc("end_game");
 		get_tree()->change_scene("res://GameOverScreen.tscn");
 	}
 
@@ -191,4 +193,8 @@ void Player::_physics_process(float delta) {
 	if(get_tree()->is_network_server()) {
 		get_node("../../Network")->call("update_position", get_name().to_int(), get_translation());
 	}
+}
+
+void Player::end_game() {
+	get_tree()->change_scene("res://GameOverScreen.tscn");
 }
