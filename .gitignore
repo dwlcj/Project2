@@ -1,6 +1,8 @@
-.vscode
 .sconsign.dblite
+.vscode
+data.txt
 
+.import/
 x11/
 win64/
 osx/
