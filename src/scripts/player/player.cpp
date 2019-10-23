@@ -11,7 +11,7 @@ using namespace godot;
 
 void Player::_register_methods() {
 	register_property<Player, bool>("strafe", &Player::strafe, true);
-	register_property<Player, Vector3>("slavePosition", &Player::slavePosition, Vector3(0,6,0), GODOT_METHOD_RPC_MODE_PUPPET);
+	register_property<Player, Vector3>("slavePosition", &Player::slavePosition, Vector3(0,15,0), GODOT_METHOD_RPC_MODE_PUPPET);
 
 	register_signal<Player>("coin_collected", "node", GODOT_VARIANT_TYPE_OBJECT);
 
@@ -46,7 +46,7 @@ void Player::_ready() {
 	Godot::print("2");
 	// get_parent()->get_parent()->get_child(4)->get_child(1)->connect("hit_floor", this, "hit_floor_received");
 
-	if (false) { /* Object::cast_to<Camera>(get_node("../OuterGimbal/InnerGimbal/Camera"))->is_current() */
+	if (true) { /* Object::cast_to<Camera>(get_node("../OuterGimbal/InnerGimbal/Camera"))->is_current() */
 		Godot::print("setting up coin collects");
 		get_parent()->get_parent()->get_node("StaticBody")->get_node("Spatial")->print_tree();
 		get_parent()->get_parent()->get_node("StaticBody")->get_node("Spatial")->get_node("KinematicBody")->get_node("Area")->connect("coin_touched", this, "collect_coin");
@@ -58,8 +58,8 @@ void Player::_ready() {
 	Godot::print("3");
 	get_parent()->get_parent()->get_child(1)->get_child(4)->connect("hit_ledge", this, "hit_ledge_received");
 	get_parent()->get_parent()->get_child(1)->get_child(4)->connect("leave_ledge", this, "leave_ledge_received");
-	set_translation(Vector3(0,6,0));
-	slavePosition = Vector3(0,6,0);
+	set_translation(Vector3(0,15,0));
+	slavePosition = Vector3(0,15,0);
 }
 
 void Player::hit_floor_received() {
