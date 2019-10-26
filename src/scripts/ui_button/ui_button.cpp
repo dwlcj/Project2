@@ -18,23 +18,7 @@ void UIButton::_ready() {
 }
 
 void UIButton::_on_Button_pressed() {
-	auto* button = Object::cast_to<OptionButton>(get_parent()->get_node("NetworkChooseLabel"));
-	auto str = button->get_item_text(button->get_selected());
-
-	if (str == "Singleplayer") {
-		std::ofstream file("data.txt");
-		file << "1";
-		Godot::print("singleplayer");
-	} else if (str == "Create Server") {
-		std::ofstream file("data.txt");
-		file << "1";
-		Godot::print("create");
-	} else if (str == "Join Server") {
-		std::ofstream file("data.txt");
-		file << "2";
-		Godot::print("join");
-	}
-	get_tree()->change_scene("res://Main.tscn");
+    get_tree()->change_scene("res://Main.tscn");
 }
 
 
