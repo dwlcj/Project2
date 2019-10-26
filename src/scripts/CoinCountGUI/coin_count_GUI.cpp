@@ -16,7 +16,7 @@ void CoinCountGUI::_init() {}
 void CoinCountGUI::_ready() {
 	coin_count = 0;
 	Input::get_singleton()->set_mouse_mode(Input::get_singleton()->MOUSE_MODE_CAPTURED);
-	get_parent()->get_parent()->get_child(5)->get_child(1)->connect("coin_collected", this, "increment_coin_label");
+	get_parent()->get_parent()->get_node("Spatial")->get_node("KinematicBody")->connect("coin_collected", this, "increment_coin_label");
 }
 
 

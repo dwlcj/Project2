@@ -2,7 +2,7 @@
 .vscode
 data.txt
 
-.import/
+Project/.import/
 x11/
 win64/
 osx/
