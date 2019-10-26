@@ -17,7 +17,6 @@ private:
 
 
 	bool strafe = true;
-	Vector3 slavePosition;
 	double gravity = -9.8 * 3;
 	Vector3 velocity;
 	Transform camera;
@@ -39,7 +38,6 @@ public:
 	void collect_coin();
 	void _process(float);
 	void _physics_process(float);
-	void end_game();
 	bool is_base_player = true;
 };
 

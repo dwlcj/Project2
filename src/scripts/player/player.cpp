@@ -11,7 +11,6 @@ using namespace godot;
 
 void Player::_register_methods() {
 	register_property<Player, bool>("strafe", &Player::strafe, true);
-	register_property<Player, Vector3>("slavePosition", &Player::slavePosition, Vector3(0,15,0), GODOT_METHOD_RPC_MODE_PUPPET);
 
 	register_signal<Player>("coin_collected", "node", GODOT_VARIANT_TYPE_OBJECT);
 
@@ -22,7 +21,6 @@ void Player::_register_methods() {
 	register_method("collect_coin", &Player::collect_coin);
 	register_method("_process", &Player::_process);
 	register_method("_physics_process", &Player::_physics_process);
-	register_method("end_game", &Player::end_game, GODOT_METHOD_RPC_MODE_REMOTE);
 }
 
 GlobalConstants* gc;
@@ -34,8 +32,6 @@ void Player::_init() {
 void Player::_ready() {
 	gc = GlobalConstants::get_singleton();
 	input = Input::get_singleton();
-
-	Godot::print("1");
 	camera = Object::cast_to<Camera>(get_node("../OuterGimbal/InnerGimbal/Camera"))->get_global_transform();
 	// get_parent()->get_parent()->get_child(0)->get_child(2)->connect("hit_floor", this, "hit_floor_received");
 	// get_parent()->get_parent()->get_child(1)->get_child(2)->connect("hit_floor", this, "hit_floor_received");
@@ -43,23 +39,17 @@ void Player::_ready() {
 	// get_parent()->get_parent()->get_child(3)->get_child(2)->connect("hit_floor", this, "hit_floor_received");
 
 	// sphere floor
-	Godot::print("2");
 	// get_parent()->get_parent()->get_child(4)->get_child(1)->connect("hit_floor", this, "hit_floor_received");
 
 	if (true) { /* Object::cast_to<Camera>(get_node("../OuterGimbal/InnerGimbal/Camera"))->is_current() */
-		Godot::print("setting up coin collects");
-		get_parent()->get_parent()->get_node("StaticBody")->get_node("Spatial")->print_tree();
 		get_parent()->get_parent()->get_node("StaticBody")->get_node("Spatial")->get_node("KinematicBody")->get_node("Area")->connect("coin_touched", this, "collect_coin");
 		get_parent()->get_parent()->get_node("StaticBody2")->get_node("Spatial")->get_node("KinematicBody")->get_node("Area")->connect("coin_touched", this, "collect_coin");
 		get_parent()->get_parent()->get_node("StaticBody3")->get_node("Spatial")->get_node("KinematicBody")->get_node("Area")->connect("coin_touched", this, "collect_coin");
 		get_parent()->get_parent()->get_node("StaticBody4")->get_node("Spatial")->get_node("KinematicBody")->get_node("Area")->connect("coin_touched", this, "collect_coin");
 	}
-
-	Godot::print("3");
 	get_parent()->get_parent()->get_child(1)->get_child(4)->connect("hit_ledge", this, "hit_ledge_received");
 	get_parent()->get_parent()->get_child(1)->get_child(4)->connect("leave_ledge", this, "leave_ledge_received");
 	set_translation(Vector3(0,15,0));
-	slavePosition = Vector3(0,15,0);
 }
 
 void Player::hit_floor_received() {
@@ -96,7 +86,6 @@ void Player::_process(float delta) {
 	}
 
 	if (get_translation().y < -20) {
-		rpc("end_game");
 		get_tree()->change_scene("res://GameOverScreen.tscn");
 	}
 
@@ -136,7 +125,7 @@ void Player::_physics_process(float delta) {
 
 	auto hv = velocity;
 	hv.y = 0;
-	if(is_network_master()){
+	
 		if (input->is_action_just_pressed("ui_space") && jumps > 0) {
 			if (sfx > 0) {
 				Object::cast_to<AudioStreamPlayer3D>(get_parent()->get_node("Jump"))->play(0);
@@ -185,16 +174,6 @@ void Player::_physics_process(float delta) {
 				velocity = move_and_slide(velocity, Vector3(0, 1, 0));
 			}
 		}
-		//rset_unreliable("slavePosition", get_translation());
-	}
-	else{
-		set_translation(slavePosition);
-	}
-	if(get_tree()->is_network_server()) {
-		get_node("../../Network")->call("update_position", get_name().to_int(), get_translation());
-	}
-}
-
-void Player::end_game() {
-	get_tree()->change_scene("res://GameOverScreen.tscn");
+		
+	
 }
