@@ -39,6 +39,7 @@ public:
 	void _process(float);
 	void _physics_process(float);
 	bool is_base_player = true;
+	void impulse(Vector3 dir);
 };
 
 }
