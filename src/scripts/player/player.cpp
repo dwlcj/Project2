@@ -172,5 +172,5 @@ void Player::_physics_process(float delta) {
 }
 
 void Player::impulse(Vector3 dir) {
-	velocity = velocity.cross(dir);
+	velocity = dir * 3;
 }

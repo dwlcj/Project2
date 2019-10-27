@@ -18,7 +18,7 @@ void Enemy::_init() {}
 void Enemy::_ready() {}
 
 Vector3 direction_to(const Vector3& a, const Vector3& b) {
-	Vector3 ret(b.x - a.x, 0, b.z - a.z);
+	Vector3 ret(b.x - a.x, b.y-a.y, b.z - a.z);
 	ret.normalize();
 	return ret;
 }
@@ -40,13 +40,13 @@ void Enemy::_physics_process(float delta) {
 		set_rotation(Vector3(0, angle, 0));
 
 		auto dir = direction_to(myT, playerT) * 10;
-		if (jumping) {
+		/*if (jumping) {
 			velocity.y = 10;
-		}
+		}*/
 		velocity.x = dir.x;
 		velocity.z = dir.z;
 
-		if (is_on_wall()) {
+		if (is_on_wall() && distance < 5) {
 			Godot::print("bumping");
 			Object::cast_to<Player>(get_parent()->get_parent()->get_node("Spatial")->get_node("KinematicBody"))->impulse(dir);
 		}
