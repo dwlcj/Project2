@@ -36,8 +36,10 @@ void Player::_ready() {
 	get_parent()->get_parent()->get_node("StaticBody6")->get_node("Spatial")->get_node("KinematicBody")->get_node("Area")->connect("coin_touched", this, "collect_coin");
 	get_parent()->get_parent()->get_node("StaticBody7")->get_node("Spatial")->get_node("KinematicBody")->get_node("Area")->connect("coin_touched", this, "collect_coin");
 
-	get_parent()->get_parent()->get_child(1)->get_child(4)->connect("hit_ledge", this, "hit_ledge_received");
-	get_parent()->get_parent()->get_child(1)->get_child(4)->connect("leave_ledge", this, "leave_ledge_received");
+	for (int i = 0; i < 6; i++) {
+		get_parent()->get_parent()->get_child(i)->get_child(4)->connect("hit_ledge", this, "hit_ledge_received");
+		get_parent()->get_parent()->get_child(i)->get_child(4)->connect("leave_ledge", this, "leave_ledge_received");
+	}
 	set_translation(Vector3(0,15,0));
 }
 
