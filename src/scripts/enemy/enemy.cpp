@@ -4,6 +4,7 @@
 
 #include <math.h>
 #include <Input.hpp>
+#include <KinematicCollision.hpp>
 
 using namespace godot;
 
@@ -29,8 +30,21 @@ void Enemy::_physics_process(float delta) {
 	float distance = myT.distance_to(playerT);
 
 	bool jumping = Input::get_singleton()->is_action_just_pressed("ui_space");
-
-	if (distance < 15) {
+	if(playerT.z > -8){
+		velocity.x = 0;
+		velocity.z = 0;
+		if(velocity.y == 0)
+			velocity.y = 10;
+		else
+			velocity.y += delta * (-9.8 * 3);
+		auto xe = myT.x;
+		auto ze = myT.z;
+		auto xp = playerT.x;
+		auto zp = playerT.z;
+		double angle = atan2(xe - xp, ze - zp);
+		set_rotation(Vector3(0, angle, 0));
+	}
+	else if (distance < 15) {
 		auto xe = myT.x;
 		auto ze = myT.z;
 		auto xp = playerT.x;
@@ -47,14 +61,19 @@ void Enemy::_physics_process(float delta) {
 		velocity.z = dir.z;
 
 		if (is_on_wall() && distance < 5) {
-			Godot::print("bumping");
 			Object::cast_to<Player>(get_parent()->get_parent()->get_node("Spatial")->get_node("KinematicBody"))->impulse(dir);
 		}
 	} else {
-		velocity.x = 0;
-		velocity.z = 0;
+		if(velocity.x == 0){
+			velocity.x = 5;
+		}
+			
+		auto kc = move_and_collide(velocity, true, true, true);
+		auto collided = kc.is_valid();
+		if(myT.x > 10 || myT.x < -10){
+			velocity = -velocity;
+		}
 	}
-
 	if (!jumping) {
 		velocity.y += delta * (-9.8 * 3);
 	}
