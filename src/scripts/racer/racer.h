@@ -13,6 +13,8 @@ class Racer : public KinematicBody {
 private:
 	Vector3 velocity;
 
+	Node* get_current_waypoint();
+
 public:
 	static void _register_methods();
 

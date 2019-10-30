@@ -29,12 +29,12 @@ void Player::_init() {
 void Player::_ready() {
 	camera = Object::cast_to<Camera>(get_node("../OuterGimbal/InnerGimbal/Camera"))->get_global_transform();
 
-	get_parent()->get_parent()->get_node("StaticBody")->get_node("Spatial")->get_node("KinematicBody")->get_node("Area")->connect("coin_touched", this, "collect_coin");
+	get_parent()->get_parent()->get_node("StaticBody0")->get_node("Spatial")->get_node("KinematicBody")->get_node("Area")->connect("coin_touched", this, "collect_coin");
+	get_parent()->get_parent()->get_node("StaticBody1")->get_node("Spatial")->get_node("KinematicBody")->get_node("Area")->connect("coin_touched", this, "collect_coin");
 	get_parent()->get_parent()->get_node("StaticBody2")->get_node("Spatial")->get_node("KinematicBody")->get_node("Area")->connect("coin_touched", this, "collect_coin");
 	get_parent()->get_parent()->get_node("StaticBody3")->get_node("Spatial")->get_node("KinematicBody")->get_node("Area")->connect("coin_touched", this, "collect_coin");
 	get_parent()->get_parent()->get_node("StaticBody4")->get_node("Spatial")->get_node("KinematicBody")->get_node("Area")->connect("coin_touched", this, "collect_coin");
-	get_parent()->get_parent()->get_node("StaticBody6")->get_node("Spatial")->get_node("KinematicBody")->get_node("Area")->connect("coin_touched", this, "collect_coin");
-	get_parent()->get_parent()->get_node("StaticBody7")->get_node("Spatial")->get_node("KinematicBody")->get_node("Area")->connect("coin_touched", this, "collect_coin");
+	get_parent()->get_parent()->get_node("StaticBody5")->get_node("Spatial")->get_node("KinematicBody")->get_node("Area")->connect("coin_touched", this, "collect_coin");
 
 	for (int i = 0; i < 6; i++) {
 		get_parent()->get_parent()->get_child(i)->get_child(4)->connect("hit_ledge", this, "hit_ledge_received");

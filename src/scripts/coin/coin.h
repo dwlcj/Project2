@@ -10,19 +10,17 @@
 
 namespace godot {
 
-	class Coin : public Area {
-		GODOT_CLASS(Coin, Area)
+class Coin : public Area {
+	GODOT_CLASS(Coin, Area)
 
-	public:
-		static void _register_methods();
-		static void _init();
-		void _on_Area_body_entered(Variant);
-		 
+private:
+	String next_coin_id;
 
-	};
-
-	
-
+public:
+	static void _register_methods();
+	static void _init();
+	void _on_Area_body_entered(Variant);
+};
 }
 
 #endif
