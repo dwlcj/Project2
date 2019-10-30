@@ -39,6 +39,12 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.117231, -8.85658, 62.5225 )
 [node name="Spatial2" parent="." instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.86131, 28.0265 )
 
+[node name="SpotLight" type="SpotLight" parent="Spatial2"]
+transform = Transform( 1, 0, 0, 0, 0.0744361, 0.997226, 0, -0.997226, 0.0744361, 0.0113277, 13.7424, 0.602695 )
+light_energy = 4.06
+spot_range = 13.5218
+spot_angle = 34.7482
+
 [node name="Spatial" parent="." instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.93888, 4.18269, -66.5658 )
 
