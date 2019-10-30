@@ -12,7 +12,7 @@ Node* Racer::get_current_waypoint() {
 	static size_t curr_waypoint = 0;
 	for (size_t i = curr_waypoint; i < 6; i++) {
 		auto str = String("StaticBody") + (i + '0');
-		Node* node = get_parent()->get_parent()->get_node(str)->get_node("Spatial");
+		Node* node = get_parent()->get_parent()->get_node(NodePath(str))->get_node("Spatial");
 		if (node->has_node("KinematicBody")) {
 			curr_waypoint = i;
 			return node->get_node("KinematicBody");
