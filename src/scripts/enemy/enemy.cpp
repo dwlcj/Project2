@@ -5,6 +5,7 @@
 #include <math.h>
 #include <Input.hpp>
 #include <KinematicCollision.hpp>
+#include <Particles.hpp>
 
 using namespace godot;
 
@@ -16,7 +17,9 @@ void Enemy::_register_methods() {
 
 void Enemy::_init() {}
 
-void Enemy::_ready() {}
+void Enemy::_ready() {
+	Object::cast_to<Particles>(get_node("Particles"))->set_emitting(false);
+}
 
 Vector3 direction_to(const Vector3& a, const Vector3& b) {
 	Vector3 ret(b.x - a.x, b.y-a.y, b.z - a.z);
@@ -31,6 +34,7 @@ void Enemy::_physics_process(float delta) {
 
 	bool jumping = Input::get_singleton()->is_action_just_pressed("ui_space");
 	if(playerT.z > -8){
+		Object::cast_to<Particles>(get_node("Particles"))->set_emitting(true);
 		velocity.x = 0;
 		velocity.z = 0;
 		if(velocity.y == 0)
