@@ -9,7 +9,6 @@
 using namespace godot;
 
 Node* Racer::get_current_waypoint() {
-	static size_t curr_waypoint = 0;
 	for (size_t i = curr_waypoint; i < 6; i++) {
 		auto str = String("StaticBody") + (i + '0');
 		Node* node = get_parent()->get_parent()->get_node(NodePath(str))->get_node("Spatial");
@@ -29,7 +28,9 @@ void Racer::_register_methods() {
 
 void Racer::_init() {}
 
-void Racer::_ready() {}
+void Racer::_ready() {
+	curr_waypoint = 0;
+}
 
 void Racer::_physics_process(float delta) {
 	auto* waypoint = get_current_waypoint();
