@@ -48,11 +48,25 @@ void Racer::_physics_process(float delta) {
 	set_rotation(Vector3(0, angle, 0));
 
 	Vector3 dir(waypointT.x - myT.x, waypointT.y - myT.y, waypointT.z - myT.z);
-	dir = dir.normalized() * 3;
+	dir = dir.normalized() * 10;
 	velocity.x = dir.x;
 	velocity.y += delta * (-9.8 * 3);
 	velocity.z = dir.z;
-	velocity = move_and_slide(velocity, Vector3(0, 1, 0));
+
+	if (jumping) {
+		if (velocity.y < 0) {
+			velocity.y = 10;
+			jumping = false;
+		}
+	} else {
+		auto kc = move_and_collide(velocity * delta, true, true, true);
+		if ((!kc.is_valid() && is_on_floor()) || is_on_wall()) {
+			jumping = true;
+			velocity.y = 10;
+		}
+	}
+
+	velocity = move_and_slide(velocity, Vector3(0, 1, 0), false, 4, 0.4);
 }
 
 void Racer::_process(float delta) {}
