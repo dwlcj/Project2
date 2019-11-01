@@ -1,0 +1,54 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://fire_01.png" type="Texture" id=1]
+
+[sub_resource type="SpatialMaterial" id=1]
+flags_unshaded = true
+vertex_color_use_as_albedo = true
+params_blend_mode = 1
+params_billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+albedo_texture = ExtResource( 1 )
+
+[sub_resource type="Gradient" id=4]
+offsets = PoolRealArray( 0, 0.644703, 0.857881, 0.932817, 1 )
+colors = PoolColorArray( 0, 0, 0, 1, 0.57826, 0.137137, 0, 1, 0.992157, 0.235294, 0, 1, 0.982934, 0.233107, 0, 1, 1, 1, 1, 1 )
+
+[sub_resource type="GradientTexture" id=5]
+gradient = SubResource( 4 )
+width = 1
+
+[sub_resource type="Curve" id=6]
+_data = [ Vector2( 0, 0 ), 0.0, 0.220431, 0, 0, Vector2( 1, 0 ), -4.47417, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=7]
+curve = SubResource( 6 )
+
+[sub_resource type="ParticlesMaterial" id=2]
+emission_shape = 1
+emission_sphere_radius = 4.93
+spread = 20.77
+gravity = Vector3( 0, 0, 0 )
+angular_velocity = 30.0
+angular_velocity_random = 1.0
+linear_accel = 1.0
+angle = 360.0
+angle_random = 1.0
+scale = 6.0
+scale_curve = SubResource( 7 )
+color_ramp = SubResource( 5 )
+
+[sub_resource type="QuadMesh" id=3]
+
+[node name="Spatial" type="Spatial"]
+
+[node name="Particles" type="Particles" parent="."]
+transform = Transform( -4.99862, 0.0117386, 0, -0.117386, -0.499862, 0, 0, 0, 30, 0.247217, 3.20882, -2.74203 )
+material_override = SubResource( 1 )
+amount = 2000
+lifetime = 3.8
+visibility_aabb = AABB( -12.1415, -2.94678, -4, 24.283, 8, 8 )
+process_material = SubResource( 2 )
+draw_pass_1 = SubResource( 3 )
