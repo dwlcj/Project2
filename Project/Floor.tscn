@@ -19,7 +19,7 @@ extents = Vector3( 5, 5, 5 )
 extents = Vector3( 4.8, 0.02, 4.8 )
 
 [sub_resource type="BoxShape" id=5]
-extents = Vector3( 5, 0.25, 0.25 )
+extents = Vector3( 5, 0.1, 0.1 )
 
 [node name="StaticBody" type="StaticBody"]
 
@@ -43,7 +43,7 @@ shape = SubResource( 4 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.79392, 0 )
 
 [node name="Ledge" type="Area" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.5, -5.25 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.75, -5.25 )
 script = ExtResource( 4 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Ledge"]

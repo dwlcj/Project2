@@ -47,13 +47,8 @@ void Player::hit_floor_received() {
 	jumps = 2;
 }
 
-bool first = true;
 void Player::hit_ledge_received() {
-	if (first) {
-		first = false;
-	} else {
-		in_ledge = true;
-	}
+	in_ledge = true;
 }
 
 void Player::leave_ledge_received() {
