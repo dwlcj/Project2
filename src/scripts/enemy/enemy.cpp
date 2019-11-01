@@ -63,10 +63,11 @@ void Enemy::_physics_process(float delta) {
 		}*/
 		velocity.x = dir.x;
 		velocity.z = dir.z;
-
 		if (is_on_wall() && distance < 5) {
 			Object::cast_to<Player>(get_parent()->get_parent()->get_node("Spatial")->get_node("KinematicBody"))->impulse(dir);
 		}
+		if(myT.z < -41)
+			velocity.z = 0;
 	} else {
 		if(velocity.x == 0){
 			velocity.x = 5;
