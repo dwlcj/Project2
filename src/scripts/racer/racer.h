@@ -12,6 +12,7 @@ class Racer : public KinematicBody {
 
 private:
 	Vector3 velocity;
+	bool jumping = false;
 
 	Node* get_current_waypoint();
 

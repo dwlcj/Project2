@@ -16,7 +16,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0547411, 1.90735e-06, -0.04
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.40165, -68.8664 )
 
 [node name="StaticBody1" parent="." instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -48.8926 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -51.1901 )
 
 [node name="StaticBody2" parent="." instance=ExtResource( 1 )]
 
