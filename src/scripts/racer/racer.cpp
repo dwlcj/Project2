@@ -34,7 +34,34 @@ void Racer::_ready() {
 
 void Racer::_physics_process(float delta) {
 	auto* waypoint = get_current_waypoint();
-	if (waypoint) {
+	auto enemyT = Object::cast_to<KinematicBody>(get_parent()->get_parent()->get_node("Enemy/KinematicBody"))->get_global_transform().origin;
+	auto distance_to_enemy = get_global_transform().origin.distance_to(enemyT);
+
+	if (distance_to_enemy < 5) {
+		fleeing = true;
+	} else if (distance_to_enemy > 10) {
+		fleeing = false;
+	}
+
+	if (fleeing) {
+		Vector3 myT = get_global_transform().origin;
+
+		auto xe = myT.x;
+		auto ze = myT.z;
+		auto xp = enemyT.x;
+		auto zp = enemyT.z;
+		double angle = atan2(xp - xe, zp - ze);
+		set_rotation(Vector3(0, angle - 3.14159, 0));
+
+		Vector3 dir(enemyT.x - myT.x, enemyT.y - myT.y, enemyT.z - myT.z);
+		dir = dir.normalized() * 10;
+		dir = dir.rotated(Vector3(0, 1, 0), 3.14159);
+		velocity.x = dir.x;
+		velocity.y += delta * (-9.8 * 3);
+		velocity.z = dir.z;
+
+		velocity = move_and_slide(velocity, Vector3(0, 1, 0), false, 4, 0.4);
+	} else if (waypoint) {
 		Vector3 myT = get_global_transform().origin;
 		Vector3 waypointT = Object::cast_to<KinematicBody>(waypoint)->get_global_transform().origin;
 
