@@ -64,3 +64,13 @@ primary goal of finishing the race. The enemy doesn't care for the Racer and onl
 eyes for you, but if you draw the enemy towards the Racer you can gain a distance
 advantage over it or potentially knock it out of the race entirely by making it run
 off the edge of the stage.
+
+--------
+-Extras-
+--------
+
+We added a ton of extra visual flares (literally) in this project. We got rid of most
+of the lighting and added a large pit of fire beneath the stage using particle effects
+for the fire. A more subtle effect is that when the enemy teapot gets angry after you
+pass it, it's spout now emits steam particles to show how angry it is. 
+
