@@ -40,11 +40,27 @@ period(.) keys toggle the background music.
 -------
 -Enemy-
 -------
-TODO
-how to interact, how to get around, bumping
+
+The enemy is a teapot that patrols the center platform of the stage. If you get 
+close enough it will try to bump you off of the stage. It will persue you until
+either you get past it or fall off the stage. If you make it past without falling off
+then the enemy will become angry and jump up and down in rage. Try and using it's 
+bumping to your advantage and jump over it to make it bump you further through the
+stage. 
 
 -------
 -Racer-
 -------
-TODO
-how to beat, what it can do, what it runs away from
+
+The Racer is an AI that is almost identical to you, the player. It travels at the
+same speed as you and shares the same goals; collecting coins and getting to the end
+of the stage. If you aren't fast enough then it will collect all of the coins before
+you are able to. If it makes it to the end of the stage before you it will attempt 
+to prevent you from finishing by protecting the final platform and bumping you away.
+Despite being a formidable opponent, it does have one flaw. It is afraid of the enemy
+who patrols the center platform. If it gets close enough to the enemy it will run in 
+fear in the opposite direction. Once it gets far enough away it will return to it's 
+primary goal of finishing the race. The enemy doesn't care for the Racer and only has
+eyes for you, but if you draw the enemy towards the Racer you can gain a distance
+advantage over it or potentially knock it out of the race entirely by making it run
+off the edge of the stage.
