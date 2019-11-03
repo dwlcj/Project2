@@ -66,17 +66,21 @@ void Enemy::_physics_process(float delta) {
 		if (is_on_wall() && distance < 5) {
 			Object::cast_to<Player>(get_parent()->get_parent()->get_node("Spatial")->get_node("KinematicBody"))->impulse(dir);
 		}
-		if(myT.z < -41)
-			velocity.z = 0;
+		if(myT.z < -41 && playerT.z < -41)
+			velocity.z = -velocity.z;
 	} else {
+		set_rotation(Vector3(0, 0, 0));
+		velocity.z = 0;
 		if(velocity.x == 0){
 			velocity.x = 5;
 		}
+		if(abs(velocity.x) < 5)
+			velocity.x = 5 * (velocity.x/abs(velocity.x));
 			
 		auto kc = move_and_collide(velocity, true, true, true);
 		auto collided = kc.is_valid();
 		if(myT.x > 10 || myT.x < -10){
-			velocity = -velocity;
+			velocity.x = -velocity.x;
 		}
 	}
 	if (!jumping) {
