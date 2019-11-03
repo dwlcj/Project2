@@ -2,7 +2,7 @@ How to build:
 
 1) Build `godot-cpp` bindings
 - git submodule update --init --recursive
-- cd code/godot-cpp
+- cd src/godot-cpp
 - scons platform=<your_platform> generate_bindings=yes
 
 2) Build game scripts
