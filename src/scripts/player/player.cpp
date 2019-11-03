@@ -40,7 +40,6 @@ void Player::_ready() {
 		get_parent()->get_parent()->get_child(i)->get_child(4)->connect("hit_ledge", this, "hit_ledge_received");
 		get_parent()->get_parent()->get_child(i)->get_child(4)->connect("leave_ledge", this, "leave_ledge_received");
 	}
-	set_translation(Vector3(0,15,0));
 }
 
 void Player::hit_floor_received() {
