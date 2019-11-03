@@ -3,6 +3,57 @@ Team Bismark
 
 TODO
 
-- overall project success (bug squashing, particles, extra credit, removed networking)
-- how enemy works (3 behav)
-- how racer works (3 behav)
+Overall this project was a pretty great success for us - not only did we
+implement all the features we wanted to satisfy the requirements, we were able
+to make the game look pretty cool (e.g. fire particles, darkness). For the
+assignment, we have a mediocre AI system, 6 uniquely identifiable AI behaviors,
+multiple agents in the world that all add value to the gameplay, and navigation
+based on waypoints. Our game lends itself perfectly to waypoint-based
+navigation because our coins - the current primary object of the game - can be
+the next goal of the player and the racer. This also allows for a mildly
+rewarding competition between the racer and the player, making for a game that
+we actually have fun playing. Replayablity also allowed us to squash a slew of
+new bugs we found regarding agent movement bounds, navigation, and retrying
+after death. All in all, we created a game that satisfies all the minimum
+requirements and had fun while doing it.
+
+Our first AI is the enemy/guard, whose entire goal is to chase and bump the
+player out of the map and off its platform. This makes the game much more
+interesting because now there is a physical, adaptive obstacle to reaching more
+coins and the end state. The first agent behavior is guarding, which can be
+identified by the guard walking back and forth (like a guard does). This
+behavior can be identified and used to avoid triggering the guard entirely,
+adding to the player experience. The second behavior is chasing, which occurs
+when the player gets too close and the guard starts pursuing and bumping the
+player. This obstacle forces the player to adapt and be smart about moving
+around the guard, adding to the challenge. Our third behavior is ANGER; this is
+identified by the guard jumping up and down with steam coming out of its pipe,
+representing how angry the guard is that it let you get past. We found this
+state particularly rewarding because it felt like you actually defeated this
+AI enemy.
+
+Our second AI is the racer, whose goal is to collect coins (to reduce the the
+player's score) and get to the end. The racer isn't really trying to win the
+game, because its goal is to make the game harder for the player to win - this
+happens when the racer collects coins the player needs to collect, or when the
+racer reaches the end before the player. Our first behavior is waypointing, or
+just racing: this is it's default behavior that makes it head towards and
+collect the next coin in its path. This behavior is particularly interesting
+because it takes advantage of the double jump mechanic we implemented for the
+player - this means it can jump over the enemy, player, walls, and sphere with
+no trouble. We believe this qualifies as a robust AI because it can basically
+run away from trouble, jump across anything, and get to the end of the map
+based entirely on the playable world environment. The second behavior is
+fleeing from the enemy, which is clearly shown when the racer gets too close to
+the enemy. We used the multi-threshold idea from class while implementing this:
+basically, if it get too close it enters a fleeing state. To exit this state and
+go back to waypointing, it must be a certain distance away (further than the
+distance required to begin fleeing). This looks a lot more natual and
+eliminated some visual bugs we had bouncing on the original single threshold we
+used. Finally, our third behavior is end state blocking. When the racer reaches
+the end platform it is done waypointing, and starts trying to block and bump
+the player away from the end goal and hopefully off the platform. Not only does
+this increase the challenge of the obstacle, this is a conditional obstacle
+that only happens if the player wasn't fast enough to beat the racer. This adds
+to the challenge of the game and makes it a much more dynamic, AI-based
+environment.
