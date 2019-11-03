@@ -6,7 +6,7 @@ TODO
 Overall this project was a pretty great success for us - not only did we
 implement all the features we wanted to satisfy the requirements, we were able
 to make the game look pretty cool (e.g. fire particles, darkness). For the
-assignment, we have a mediocre AI system, 6 uniquely identifiable AI behaviors,
+assignment, we have a functional and reactive AI system, 6 uniquely identifiable AI behaviors,
 multiple agents in the world that all add value to the gameplay, and navigation
 based on waypoints. Our game lends itself perfectly to waypoint-based
 navigation because our coins - the current primary object of the game - can be
